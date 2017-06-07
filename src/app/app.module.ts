@@ -4,13 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-
 import { AngularFireModule } from 'angularfire2';
-
+import { BatchesComponent } from './batches/batches.component';
+import { SamplesComponent } from './batches/samples/samples.component';
+import { routes } from "app/app.routes"; 
+import { RouterModule } from "@angular/router";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'; 
 
 export const firebaseConfig  = {
     apiKey: "AIzaSyBa6CmVnFn3vTdtyTBNj7GORku5nBM2cS8",
@@ -22,7 +24,9 @@ export const firebaseConfig  = {
   };
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BatchesComponent,
+    SamplesComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,9 @@ export const firebaseConfig  = {
     HttpModule, 
     StoreModule.provideStore({mainStoreReducer}), 
     EffectsModule.run(MainEffects),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig), 
+    RouterModule.forRoot(routes),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
   ],
   providers: [],
   bootstrap: [AppComponent]

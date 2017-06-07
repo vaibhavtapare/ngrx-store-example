@@ -1,11 +1,18 @@
+import { Samples } from './../model/samples';
+import { ServiceResponce } from './../model/service-responce';
 import { Batches } from './../model/workingbatches';
 import { INCREMENT, EVENT_FROM_EFFECT } from './../actions/main-action-creator';
 import { State, initialState } from './../state/main-state';
 import { ActionReducer, Action } from '@ngrx/store';
+import * as deepFreeze from 'deep-freeze-strict';
+
 export const mainStoreReducer: ActionReducer<State> =
     (state = initialState, action: Action) => {
+
+        deepFreeze(state);
+
         console.log('Action came in! ' + action.type);
-        //debugger;
+        ////debugger;
         switch (action.type) {
             case INCREMENT: {
                 console.log('the payload string is: ' + action.payload.innerObj.text);
@@ -25,10 +32,10 @@ export const mainStoreReducer: ActionReducer<State> =
 
 
             case "GOT_FIREBASE_ARRAY": {
-                debugger;
+                //debugger;
                 console.log("got array payload from effect: " + action.payload.pulledArray);
                 if (action.payload.pulledArray != undefined) {
-                    debugger;
+                    //debugger;
                     let payloadArray = <Batches[]>action.payload.pulledArray;
                     console.log("got payload from effect: " + payloadArray);
                     console.log("first element is: " + payloadArray[0]['Batch']);
@@ -42,7 +49,7 @@ export const mainStoreReducer: ActionReducer<State> =
             }
 
             case "GOT_FIREBASE_OBJECT": {
-                debugger;
+                //debugger;
                 if (action.payload.pulledObject != undefined) {
                     let payloadObject = <Batches[]>action.payload.pulledObject;
                     console.log("got object payload from effect: " + payloadObject);
@@ -52,7 +59,58 @@ export const mainStoreReducer: ActionReducer<State> =
                     return {
                         displayText: payloadObject['Batch'],
                         counter: state.counter + 100,
-                        batches: [...state.batches, payloadObject]
+                        batches: [...state.batches, payloadObject]                         
+
+                    };
+                }
+                else {
+                    return state;
+                }
+            }
+
+            case "GOT_WORKING_BATCHES":{
+                if (action.payload.workingBatchObject != undefined) {
+                    let serviceResponce: ServiceResponce;
+                    let payloadObject = <Batches[]>action.payload.workingBatchObject;
+                    console.log("got object payload from effect: " + payloadObject);
+                    // console.log("first element is: " + payloadObject);
+                    //debugger; 
+                    this.getData = JSON.stringify(payloadObject || null)
+                    this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
+                    this.samplesData = this.serviceResponce.Data.toString();      
+                    this.jsonArray = JSON.parse(this.samplesData);
+
+
+                    return {
+                        displayText: payloadObject['Batch'],
+                        counter: state.counter + 100,
+                        batches: this.jsonArray
+                    };
+                }
+                else {
+                    return state;
+                }
+            }
+
+
+              case "GOT_SAMPLES_OF_BATCH":{
+                if (action.payload.workingBatchObject != undefined) {
+                    let serviceResponce: ServiceResponce;
+                    let payloadObject = <Samples[]>action.payload.workingBatchObject;
+                    console.log("got object payload from effect: " + payloadObject);
+                    // console.log("first element is: " + payloadObject);
+                    //debugger; 
+                    this.getData = JSON.stringify(payloadObject || null)
+                    this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
+                    this.samplesData = this.serviceResponce.Data.toString();      
+                    this.jsonArray = JSON.parse(this.samplesData);
+
+
+                    return {
+                        displayText: payloadObject['Batch'],
+                        counter: state.counter + 100,
+                        samples: this.jsonArray, 
+                        batches: state.batches
                     };
                 }
                 else {

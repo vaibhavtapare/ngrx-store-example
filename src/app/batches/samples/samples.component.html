@@ -1,0 +1,27 @@
+
+<h1>Samples</h1>
+{{ selectedBatch }}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let item of samples">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">Code: <label for="batch" #batch>{{item.Code}}</label></h4>
+              <p class="card-text">Farm: {{item.FarmName}}</p>
+              <p class="card-text">Desc: {{item.SampleDescription}}</p>
+              <p class="card-text">NIR: {{item.NIRClassID}}</p>
+              <p class="card-text">CHEM: {{item.ChemClassID}}</p>
+              <p class="card-text"><small class="text-muted">Completed: {{item.CompletedDate}}</small></p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-button">
+                <button type="button" (click)="goBackToBatches()" class="btn btn-primary"> Show Samples</button>
+  </div>
+</div>

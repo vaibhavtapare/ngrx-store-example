@@ -17,3 +17,7 @@ a {
  background-color: rgba(51, 51, 51, 0.85);
  border-color: rgba(51, 51, 51, 0.85);
 }
+
+.card-button {
+    float: right;
+}
