@@ -1,8 +1,9 @@
+import { LoaderService } from './state-management/loader/loader.service';
 import { Batches } from './state-management/model/workingbatches';
 import { Cheese } from './.cheese';
 import { INCREMENT } from './state-management/actions/main-action-creator';
 import { State } from './state-management/state/main-state';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from "@ngrx/store";
 import * as firebase from 'firebase';
 
@@ -12,7 +13,17 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app works!';
- 
+  showLoader: boolean; 
+
+  constructor(
+        private loaderService: LoaderService) {
+    }
+  
+  ngOnInit() {
+        this.loaderService.status.subscribe((val: boolean) => {
+            this.showLoader = val;
+        });
+    }
 }

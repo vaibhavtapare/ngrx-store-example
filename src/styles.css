@@ -21,3 +21,20 @@ a {
 .card-button {
     float: right;
 }
+
+ md-card-spinner {
+      padding-left: 60px; 
+    }
+
+    md-spinner {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      top: 10px;
+      left: 10px;
+      opacity: 0.0;
+    }
+
+    md-spinner.show {
+      opacity: 1.0;
+    }

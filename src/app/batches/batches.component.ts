@@ -1,10 +1,10 @@
-import { Router } from '@angular/router'; 
-import { Samples } from './../state-management/model/samples';
+import { LoaderService } from './../state-management/loader/loader.service';
+import { WorkingBatchSamples } from './../state-management/model/workingBatchSamples';
+import { Router } from '@angular/router';
 import { State } from './../state-management/state/main-state';
 import { Batches } from './../state-management/model/workingbatches';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-batches',
@@ -14,20 +14,33 @@ import { Component, OnInit } from '@angular/core';
 export class BatchesComponent implements OnInit {
 
   workingBatches = [];
-  samples = []; 
+  samples = [];
   msg = '';
-  constructor(private store: Store<State>,private router: Router) {
+  searching = false;
+  showLoading: boolean = false;
+
+  constructor(private store: Store<State>, private router: Router,private loaderService: LoaderService) {
     console.log('We have a store! ' + store);
 
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        //debugger;
+        debugger;
         this.workingBatches = <Batches[]>data.batches;
-        this.samples = <Samples[]>data.samples;
+        this.samples = <WorkingBatchSamples[]>data.samples;
         //this.msg = data.message;
         ////////debugger; 
-
+        this.searching = data.loading;
         console.log(this.workingBatches);
+        if (this.searching === true) {
+          //debugger;
+          //this.showLoading = true;
+          this.loaderService.display(true);
+        }
+        else {
+          //debugger;
+          //this.showLoading = false;
+          this.loaderService.display(false);
+        }
       })
 
     // setTimeout(() => {
@@ -42,16 +55,16 @@ export class BatchesComponent implements OnInit {
 
   }
 
-  onSelect(batch) {    
+  onSelect(batch) {
     //alert('Clicked - ' + batch.innerText);
     this.router.navigate(['/samples', batch.innerText]);
   }
 
   ngOnInit() {
     //debugger;
-      if (this.workingBatches.length === 0) {
-        this.store.dispatch({ type: "PULL_WORKING_BATCHES" });  
-      }
+    if (this.workingBatches.length === 0) {
+      this.store.dispatch({ type: "PULL_WORKING_BATCHES" });
+    }
   }
 
 }

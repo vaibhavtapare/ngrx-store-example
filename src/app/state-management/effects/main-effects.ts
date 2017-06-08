@@ -1,3 +1,5 @@
+import { State } from 'app/state-management/state/main-state';
+import { Store } from '@ngrx/store';
 import { Effect, Actions, toPayload } from "@ngrx/effects";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
@@ -5,11 +7,9 @@ import * as firebase from 'firebase';
 import { AngularFire } from 'angularfire2';
 import { Http } from "@angular/http";
 
-
-
 @Injectable()
 export class MainEffects {
-    constructor(private action$: Actions, private af: AngularFire, private _http: Http) {
+    constructor(private action$: Actions, private af: AngularFire, private _http: Http,private store: Store<State>) {
     }
 
     @Effect() update$ = this.action$
@@ -59,6 +59,7 @@ export class MainEffects {
 
     @Effect() getWorkingbatches$ = this.action$
         .ofType('PULL_WORKING_BATCHES')
+        .do(()=> this.store.dispatch({ type: "SHOW_LOADING" }) )
         .switchMap(() => {
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetWorkingBatches/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20/HAG')
                 .switchMap(result => {
@@ -69,14 +70,37 @@ export class MainEffects {
 
     @Effect() getSamplesForBatch$ = this.action$
         .ofType('PULL_SAMPLES_OF_BATCH')
+        .do(()=> this.store.dispatch({ type: "SHOW_LOADING" }) )
         .map(toPayload)
         .switchMap(toPayload => {
+              debugger;
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetSamplesForUser/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20/' + toPayload.Batch)
                 .switchMap(result => {
-                    //debugger;
+                 
                     return Observable.of({ type: "GOT_SAMPLES_OF_BATCH", payload: { workingBatchObject: result.json() } })
                 })
         })
 
+
+    @Effect() getSample$ = this.action$
+        .ofType('PULL_SAMPLE_DETAILS')
+        .do(()=> this.store.dispatch({ type: "SHOW_LOADING" }) )
+        .map(toPayload)
+        .switchMap(toPayload => {
+            return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetSamplesDetails/' + toPayload.LabID+ '/' + toPayload.affiliate)
+                .switchMap(result => {
+                    //debugger;
+                    return Observable.of({ type: "GOT_SAMPLE_DETAILS", payload: { sampleDetailsObject: result.json() } })
+                })
+        })
+
+
+     @Effect() showLoader$ = this.action$
+        .ofType('SHOW_LOADING')
+        .map(toPayload)
+        .switchMap(payload => {
+            console.log('Show loader start');
+            return Observable.of({ type: "SHOW_LOADING_RESPOND", payload: { loading: true } })
+        });
 }
 

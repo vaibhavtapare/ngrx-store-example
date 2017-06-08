@@ -1,6 +1,6 @@
-export class Samples {
+export class WorkingBatchSamples {
     constructor(
-        public Status: string,
+        public Status: number,
         public LIMSStatus: string,
         public Code: string,
         public FarmName: string,

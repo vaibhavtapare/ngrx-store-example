@@ -1,3 +1,4 @@
+import { LoaderService } from './state-management/loader/loader.service';
 import { MainEffects } from './state-management/effects/main-effects';
 import { mainStoreReducer } from './state-management/reducers/main-reducer';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +13,9 @@ import { BatchesComponent } from './batches/batches.component';
 import { SamplesComponent } from './batches/samples/samples.component';
 import { routes } from "app/app.routes"; 
 import { RouterModule } from "@angular/router";
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'; 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SampleComponent } from './batches/sample/sample.component';
+import { UnknownComponent } from './unknown/unknown.component'; 
 
 export const firebaseConfig  = {
     apiKey: "AIzaSyBa6CmVnFn3vTdtyTBNj7GORku5nBM2cS8",
@@ -26,7 +29,10 @@ export const firebaseConfig  = {
   declarations: [
     AppComponent,
     BatchesComponent,
-    SamplesComponent
+    SamplesComponent,
+    SampleComponent,
+    UnknownComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -37,8 +43,9 @@ export const firebaseConfig  = {
     AngularFireModule.initializeApp(firebaseConfig), 
     RouterModule.forRoot(routes),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
+   
   ],
-  providers: [],
+  providers: [LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
