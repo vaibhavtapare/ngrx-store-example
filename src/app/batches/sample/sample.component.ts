@@ -1,3 +1,4 @@
+import { LoaderService } from './../../state-management/loader/loader.service';
 import { Sample } from './../../state-management/model/sample';
 import { State } from './../../state-management/state/main-state';
 import { Store } from '@ngrx/store';
@@ -16,13 +17,26 @@ export class SampleComponent implements OnInit {
   labID: string;
   affiliate: string;
   sample: Sample;
-  constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute) {
+  searching: boolean = false;
+
+  constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute,private loaderService: LoaderService) {
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
         debugger;
         this.affiliate = data.affiliate;
         if (data.sample != undefined) {
           this.sample = data.sample;
+        }
+        this.searching = data.loading;
+        if (this.searching === true) {
+          //debugger;
+          //this.showLoading = true;
+          this.loaderService.display(true);
+        }
+        else {
+          //debugger;
+          //this.showLoading = false;
+          this.loaderService.display(false);
         }
       })
   }

@@ -1,3 +1,4 @@
+import { LoaderService } from './../../state-management/loader/loader.service';
 import { WorkingBatchSamples } from './../../state-management/model/workingBatchSamples';
 import { Routes, ActivatedRoute, Router } from '@angular/router';
 import { Batches } from './../../state-management/model/workingbatches';
@@ -15,12 +16,26 @@ export class SamplesComponent implements OnInit {
   samples = [];
   selectedBatch: number;
   private sub: any;
-  constructor(private store: Store<State>, private route: ActivatedRoute, private router: Router) {
+  searching = false;
+  showLoading: boolean = false;
+
+  constructor(private store: Store<State>, private route: ActivatedRoute, private router: Router, private loaderService: LoaderService) {
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
         debugger;
         this.workingBatches = <Batches[]>data.batches;
         this.samples = <WorkingBatchSamples[]>data.samples;
+        this.searching = data.loading;
+        if (this.searching === true) {
+          //debugger;
+          //this.showLoading = true;
+          this.loaderService.display(true);
+        }
+        else {
+          //debugger;
+          //this.showLoading = false;
+          this.loaderService.display(false);
+        }
       })
   }
   ngOnInit() {
@@ -38,6 +53,6 @@ export class SamplesComponent implements OnInit {
 
   onSelect(selectedCode) {
     //alert(selectedCode.innerText);
-    this.router.navigate(['sample/',this.selectedBatch,selectedCode.innerText]);
+    this.router.navigate(['sample/', this.selectedBatch, selectedCode.innerText]);
   }
 }

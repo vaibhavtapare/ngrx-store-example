@@ -15,7 +15,13 @@ import { routes } from "app/app.routes";
 import { RouterModule } from "@angular/router";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SampleComponent } from './batches/sample/sample.component';
-import { UnknownComponent } from './unknown/unknown.component'; 
+import { UnknownComponent } from './unknown/unknown.component';
+import { AddsampleComponent } from './addsample/addsample.component';
+import { BilltoComponent } from './addsample/billto/billto.component';
+import { SampledetailsComponent } from './addsample/sampledetails/sampledetails.component';
+import { PackageselectionComponent } from './addsample/packageselection/packageselection.component';
+import { AnalysisoptionsComponent } from './addsample/analysisoptions/analysisoptions.component';
+import { SubmissionsummaryComponent } from './addsample/submissionsummary/submissionsummary.component'; 
 
 export const firebaseConfig  = {
     apiKey: "AIzaSyBa6CmVnFn3vTdtyTBNj7GORku5nBM2cS8",
@@ -32,6 +38,12 @@ export const firebaseConfig  = {
     SamplesComponent,
     SampleComponent,
     UnknownComponent,
+    AddsampleComponent,
+    BilltoComponent,
+    SampledetailsComponent,
+    PackageselectionComponent,
+    AnalysisoptionsComponent,
+    SubmissionsummaryComponent,
     
   ],
   imports: [
