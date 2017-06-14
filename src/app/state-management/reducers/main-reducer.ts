@@ -13,7 +13,7 @@ export const mainStoreReducer: ActionReducer<State> =
         deepFreeze(state);
 
         console.log('Action came in! ' + action.type);
-        ////debugger;
+        //////debugger;
         switch (action.type) {
             case INCREMENT: {
                 console.log('the payload string is: ' + action.payload.innerObj.text);
@@ -33,14 +33,14 @@ export const mainStoreReducer: ActionReducer<State> =
 
 
             case "GOT_FIREBASE_ARRAY": {
-                //debugger;
+                ////debugger;
                 console.log("got array payload from effect: " + action.payload.pulledArray);
                 if (action.payload.pulledArray != undefined) {
-                    //debugger;
+                    ////debugger;
                     let payloadArray = <Batches[]>action.payload.pulledArray;
                     console.log("got payload from effect: " + payloadArray);
                     console.log("first element is: " + payloadArray[0]['Batch']);
-                     return {
+                    return {
                         displayText: payloadArray['Batch'],
                         counter: state.counter + 100,
                         batches: payloadArray
@@ -50,7 +50,7 @@ export const mainStoreReducer: ActionReducer<State> =
             }
 
             case "GOT_FIREBASE_OBJECT": {
-                //debugger;
+                ////debugger;
                 if (action.payload.pulledObject != undefined) {
                     let payloadObject = <Batches[]>action.payload.pulledObject;
                     console.log("got object payload from effect: " + payloadObject);
@@ -60,7 +60,7 @@ export const mainStoreReducer: ActionReducer<State> =
                     return {
                         displayText: payloadObject['Batch'],
                         counter: state.counter + 100,
-                        batches: [...state.batches, payloadObject]                         
+                        batches: [...state.batches, payloadObject]
 
                     };
                 }
@@ -69,23 +69,23 @@ export const mainStoreReducer: ActionReducer<State> =
                 }
             }
 
-            case "GOT_WORKING_BATCHES":{
+            case "GOT_WORKING_BATCHES": {
                 if (action.payload.workingBatchObject != undefined) {
                     let serviceResponce: ServiceResponce;
                     let payloadObject = <Batches[]>action.payload.workingBatchObject;
                     console.log("got object payload from effect: " + payloadObject);
                     // console.log("first element is: " + payloadObject);
-                    //debugger; 
+                    ////debugger; 
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
-                    this.samplesData = this.serviceResponce.Data.toString();      
+                    this.samplesData = this.serviceResponce.Data.toString();
                     this.jsonArray = JSON.parse(this.samplesData);
 
 
                     return {
                         displayText: payloadObject['Batch'],
                         counter: state.counter + 100,
-                        batches: this.jsonArray,                         
+                        batches: this.jsonArray,
                         affiliate: 'HAG',
                         loading: false
                     };
@@ -96,23 +96,23 @@ export const mainStoreReducer: ActionReducer<State> =
             }
 
 
-              case "GOT_SAMPLES_OF_BATCH":{
+            case "GOT_SAMPLES_OF_BATCH": {
                 if (action.payload.workingBatchObject != undefined) {
                     let serviceResponce: ServiceResponce;
                     let payloadObject = <WorkingBatchSamples[]>action.payload.workingBatchObject;
                     console.log("got object payload from effect: " + payloadObject);
                     // console.log("first element is: " + payloadObject);
-                    //debugger; 
+                    ////debugger; 
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
-                    this.samplesData = this.serviceResponce.Data.toString();      
+                    this.samplesData = this.serviceResponce.Data.toString();
                     this.jsonArray = JSON.parse(this.samplesData);
 
                     return {
                         displayText: payloadObject['Batch'],
                         counter: state.counter + 100,
-                        samples: this.jsonArray, 
-                        batches: state.batches, 
+                        samples: this.jsonArray,
+                        batches: state.batches,
                         affiliate: 'HAG',
                         loading: false
                     };
@@ -123,27 +123,27 @@ export const mainStoreReducer: ActionReducer<State> =
             }
 
 
-            case "GOT_SAMPLE_DETAILS":{
-                debugger; 
+            case "GOT_SAMPLE_DETAILS": {
+                //debugger; 
                 if (action.payload.sampleDetailsObject != undefined) {
                     let serviceResponce: ServiceResponce;
                     let payloadObject = <Sample[]>action.payload.sampleDetailsObject;
                     console.log("got object payload from effect: " + payloadObject);
                     // console.log("first element is: " + payloadObject);
-                    //debugger; 
+                    debugger; 
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
-                    this.samplesData = this.serviceResponce.Data.toString();      
-                    this.jsonArray = JSON.parse(this.samplesData);
+                    this.samplesData = this.serviceResponce.Data;
+                    this.jsonArray = <Sample>JSON.parse(this.samplesData);
 
                     return {
                         displayText: payloadObject['Batch'],
                         counter: state.counter + 100,
-                        samples: state.samples, 
-                        batches: state.batches, 
-                        affiliate: 'HAG', 
+                        samples: state.samples,
+                        batches: state.batches,
+                        affiliate: 'HAG',
                         sample: this.jsonArray,
-                        loading: false 
+                        loading: false
                     };
                 }
                 else {
@@ -151,18 +151,46 @@ export const mainStoreReducer: ActionReducer<State> =
                 }
             }
 
+            case "GOT_BILLTO_ACCOUTS": {
+                 if (action.payload.billtoListObject != undefined) {
+                    let serviceResponce: ServiceResponce;
+                    let payloadObject = <Sample[]>action.payload.billtoListObject;
+                    console.log("got object payload from effect: " + payloadObject);
+                    // console.log("first element is: " + payloadObject);
+                    ////debugger; 
+                    this.getData = JSON.stringify(payloadObject || null)
+                    this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
+                    this.samplesData = this.serviceResponce.Data.toString();
+                    this.jsonArray = JSON.parse(this.samplesData);
 
-             case "SHOW_LOADING_RESPOND": {
-                debugger;
-                if (action.payload.loading != undefined) {                   
-                    return {                
+                    return {
+                        displayText: payloadObject['Batch'],
+                        counter: state.counter + 100,
+                        samples: state.samples,
+                        batches: state.batches,
+                        affiliate: 'HAG',
+                        sample: state.sample,
+                        billto: this.jsonArray,
+                        loading: false
+                    };
+                }
+                else {
+                    return state;
+                }
+
+            }
+
+            case "SHOW_LOADING_RESPOND": {
+                //debugger;
+                if (action.payload.loading != undefined) {
+                    return {
                         displayText: 'Loading',
                         counter: state.counter + 1,
-                        samples: state.samples, 
-                        batches: state.batches, 
-                        affiliate: 'HAG', 
-                        sample: this.jsonArray, 
-                        loading: true 
+                        samples: state.samples,
+                        batches: state.batches,
+                        affiliate: 'HAG',
+                        sample: this.jsonArray,
+                        loading: true
                     };
                 }
                 else {

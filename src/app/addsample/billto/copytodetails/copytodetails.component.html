@@ -1,0 +1,48 @@
+<div>
+  <md-card>
+          <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-select align="start" placeholder="CopyTo1" class="example-full-width">
+              <md-option *ngFor="let account of accounts" [value]="account.value">
+                {{ account.viewValue }}
+              </md-option>
+            </md-select>
+          </td>
+
+          <td>
+            <md-select align="start" placeholder="CopyTo2" class="example-full-width">
+              <md-option *ngFor="let account of accounts" [value]="account.value">
+                {{ account.viewValue }}
+              </md-option>
+            </md-select>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <md-select align="start" placeholder="CopyTo3" class="example-full-width">
+              <md-option *ngFor="let account of accounts" [value]="account.value">
+                {{ account.viewValue }}
+              </md-option>
+            </md-select>
+          </td>
+
+          <td>
+            <md-select align="start" placeholder="CopyTo4" class="example-full-width">
+              <md-option *ngFor="let account of accounts" [value]="account.value">
+                {{ account.viewValue }}
+              </md-option>
+            </md-select>
+          </td>
+        </tr>
+      </table>   
+
+    <div class="button-row">
+      <button md-raised-button color="primary">Previous</button>
+      <button md-raised-button color="primary">Next</button>
+    </div>
+
+
+  </md-card>
+</div>

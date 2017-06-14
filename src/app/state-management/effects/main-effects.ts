@@ -4,12 +4,12 @@ import { Effect, Actions, toPayload } from "@ngrx/effects";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import * as firebase from 'firebase';
-import { AngularFire } from 'angularfire2';
+// import { AngularFire } from 'angularfire2';
 import { Http } from "@angular/http";
 
 @Injectable()
 export class MainEffects {
-    constructor(private action$: Actions, private af: AngularFire, private _http: Http,private store: Store<State>) {
+    constructor(private action$: Actions, private _http: Http,private store: Store<State>) {
     }
 
     @Effect() update$ = this.action$
@@ -35,27 +35,27 @@ export class MainEffects {
                 )
         )
 
-    @Effect() pullArrayFromFirebase$ = this.action$
-        .ofType('PULL_ARRAY_FROM_FIREBASE')
-        .switchMap(() => {
-            return this.af.database.list('/samples/')
-                .switchMap(result =>
-                    //console.log(result),
-                    Observable.of({ type: "GOT_FIREBASE_ARRAY", payload: { pulledArray: result } })
-                )
-        });
+    // @Effect() pullArrayFromFirebase$ = this.action$
+    //     .ofType('PULL_ARRAY_FROM_FIREBASE')
+    //     .switchMap(() => {
+    //         return this.af.database.list('/samples/')
+    //             .switchMap(result =>
+    //                 //console.log(result),
+    //                 Observable.of({ type: "GOT_FIREBASE_ARRAY", payload: { pulledArray: result } })
+    //             )
+    //     });
 
 
-    @Effect() pullObjectFromFirebase$ = this.action$
-        .ofType('PULL_OBJECT_FROM_FIREBASE')
-        .switchMap(() => {
-            return this.af.database.object('/samples/')
-                .switchMap(result => {
-                    //console.log(result), 
-                    return Observable.of({ type: "GOT_FIREBASE_OBJECT", payload: { pulledObject: result } })
+    // @Effect() pullObjectFromFirebase$ = this.action$
+    //     .ofType('PULL_OBJECT_FROM_FIREBASE')
+    //     .switchMap(() => {
+    //         return this.af.database.object('/samples/')
+    //             .switchMap(result => {
+    //                 //console.log(result), 
+    //                 return Observable.of({ type: "GOT_FIREBASE_OBJECT", payload: { pulledObject: result } })
 
-                })
-        })
+    //             })
+    //     })
 
     @Effect() getWorkingbatches$ = this.action$
         .ofType('PULL_WORKING_BATCHES')
@@ -63,7 +63,7 @@ export class MainEffects {
         .switchMap(() => {
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetWorkingBatches/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20/HAG')
                 .switchMap(result => {
-                    //debugger;
+                    ////debugger;
                     return Observable.of({ type: "GOT_WORKING_BATCHES", payload: { workingBatchObject: result.json() } })
                 })
         })
@@ -73,7 +73,7 @@ export class MainEffects {
         .do(()=> this.store.dispatch({ type: "SHOW_LOADING" }) )
         .map(toPayload)
         .switchMap(toPayload => {
-              debugger;
+              //debugger;
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetSamplesForUser/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20/' + toPayload.Batch)
                 .switchMap(result => {
                  
@@ -89,11 +89,23 @@ export class MainEffects {
         .switchMap(toPayload => {
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetSamplesDetails/' + toPayload.LabID+ '/' + toPayload.affiliate)
                 .switchMap(result => {
-                    //debugger;
+                    ////debugger;
                     return Observable.of({ type: "GOT_SAMPLE_DETAILS", payload: { sampleDetailsObject: result.json() } })
                 })
         })
 
+     @Effect() getBilltoAccounts$ = this.action$
+        .ofType('PULL_BILLTO_ACCOUTS')
+        .do(()=> this.store.dispatch({ type: "SHOW_LOADING" }) )
+        .map(toPayload)
+        .switchMap(toPayload => {
+            return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetBillToAccountForAccount/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20')
+                .switchMap(result => {
+                    //debugger;
+                    return Observable.of({ type: "GOT_BILLTO_ACCOUTS", payload: { billtoListObject: result.json() } })
+                })
+        })
+    
 
      @Effect() showLoader$ = this.action$
         .ofType('SHOW_LOADING')

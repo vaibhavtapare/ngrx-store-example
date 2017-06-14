@@ -1,3 +1,4 @@
+
 <h1>Working Batches</h1>
 <div [class.show]="searching">loading</div>
 <div class="container">
@@ -8,13 +9,17 @@
           <div class="card">
             <div class="card-block">
               <h4 class="card-title">Batch: <label for="batch" #batch>{{item.Batch}}</label></h4>
-              <p class="card-text">Code: {{item.Code}}</p>
+              <p class="card-text">Code: <label for="batch" #code>{{item.Code}}</label></p>
               <p class="card-text">Total Samples: {{item.TotalSamples}}</p>
               <p class="card-text">Total NIR: {{item.NIRTotal}}</p>
               <p class="card-text">Total CHEM: {{item.ChemTotal}}</p>
               <p class="card-text"><small class="text-muted">Last updated {{item.BatchDate}}</small></p>
               <div class="card-button">
-                <button type="button" (click)="onSelect(batch)" class="btn btn-primary"> Show Samples</button>
+                <button type="button" (click)="onSelect(batch)" class="btn btn-primary btn-space"> Show Samples</button>
+              </div>
+
+              <div class="card-button">
+                  <button type="button" (click)="onAddSample(batch,code)" class="btn btn-primary btn-space">Add Sample</button>
               </div>
             </div>
           </div>
@@ -23,4 +28,3 @@
     </div>
   </div>
 </div>
-

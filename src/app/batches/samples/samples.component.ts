@@ -15,31 +15,36 @@ export class SamplesComponent implements OnInit {
   workingBatches = [];
   samples = [];
   selectedBatch: number;
+
   private sub: any;
   searching = false;
   showLoading: boolean = false;
-
+  labID: string;
   constructor(private store: Store<State>, private route: ActivatedRoute, private router: Router, private loaderService: LoaderService) {
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        debugger;
+        //debugger;
         this.workingBatches = <Batches[]>data.batches;
         this.samples = <WorkingBatchSamples[]>data.samples;
+
         this.searching = data.loading;
         if (this.searching === true) {
-          //debugger;
+          ////debugger;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          //debugger;
+          ////debugger;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
       })
   }
+
+ 
+
   ngOnInit() {
-    debugger;
+    //debugger;
     this.workingBatches = [];
     this.sub = this.route.params.subscribe(params => {
       this.selectedBatch = +params['batch'];
@@ -55,4 +60,6 @@ export class SamplesComponent implements OnInit {
     //alert(selectedCode.innerText);
     this.router.navigate(['sample/', this.selectedBatch, selectedCode.innerText]);
   }
+
+  
 }

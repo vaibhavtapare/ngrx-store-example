@@ -12,32 +12,32 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
   styleUrls: ['./batches.component.css']
 })
 export class BatchesComponent implements OnInit {
-
+  labID: string;  
   workingBatches = [];
   samples = [];
   msg = '';
   searching = false;
   showLoading: boolean = false;
 
-  constructor(private store: Store<State>, private router: Router,private loaderService: LoaderService) {
+  constructor(private store: Store<State>, private router: Router, private loaderService: LoaderService) {
     console.log('We have a store! ' + store);
-
+   
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        debugger;
+        ////debugger;
         this.workingBatches = <Batches[]>data.batches;
         this.samples = <WorkingBatchSamples[]>data.samples;
         //this.msg = data.message;
-        ////////debugger; 
+        //////////debugger; 
         this.searching = data.loading;
         console.log(this.workingBatches);
         if (this.searching === true) {
-          //debugger;
+          ////debugger;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          //debugger;
+          ////debugger;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
@@ -55,13 +55,23 @@ export class BatchesComponent implements OnInit {
 
   }
 
+   onAddSample(selectedBatch, selectedCode) {
+    //console.log('Add Sample Clicked');
+    //alert('Add sample Clicked');
+     //this.router.navigate(['sample/', this.selectedBatch, selectedCode.innerText]);
+    //alert(selectedBatch.innerText + selectedCode.innerText); 
+    this.labID = ("00000" + selectedBatch.innerText).slice(-5) + ("00000" + selectedCode.innerText).slice(-3); 
+    this.router.navigate(['addsample/', this.labID]);
+  }
+
   onSelect(batch) {
     //alert('Clicked - ' + batch.innerText);
     this.router.navigate(['/samples', batch.innerText]);
   }
 
+
   ngOnInit() {
-    //debugger;
+    ////debugger;
     if (this.workingBatches.length === 0) {
       this.store.dispatch({ type: "PULL_WORKING_BATCHES" });
     }

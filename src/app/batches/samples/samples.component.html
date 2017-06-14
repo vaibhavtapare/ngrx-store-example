@@ -1,14 +1,15 @@
 <h1>
   Samples</h1>
 <!--{{ selectedBatch }}-->
-<div class="container">
+
+<div class="container"> 
   <div class="row">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-4" *ngFor="let item of samples">
           <div class="card">
             <div class="card-block">
-              <h4 class="card-title">Code: <label for="batch" #code>{{item.Code}}</label></h4>
+              <h4 class="card-title">Code: <label for="code" #code>{{item.Code}}</label></h4>
               <p class="card-text">Farm: {{item.FarmName}}</p>
               <p class="card-text">Desc: {{item.SampleDescription}}</p>
               <p class="card-text">NIR: {{item.NIRClassID}}</p>

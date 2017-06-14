@@ -22,19 +22,20 @@ export class SampleComponent implements OnInit {
   constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute,private loaderService: LoaderService) {
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        debugger;
+        //debugger;
         this.affiliate = data.affiliate;
         if (data.sample != undefined) {
+          debugger;
           this.sample = data.sample;
         }
         this.searching = data.loading;
         if (this.searching === true) {
-          //debugger;
+          ////debugger;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          //debugger;
+          ////debugger;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
@@ -42,7 +43,7 @@ export class SampleComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
+    //debugger;
     this.sub = this.route.params.subscribe(params => {
       this.selectedBatch = +params['batch'];
       this.selectedCode = +params['code'];

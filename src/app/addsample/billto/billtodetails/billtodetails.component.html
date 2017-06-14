@@ -1,0 +1,119 @@
+<section class="sample-app-content">
+
+  <form [formGroup]="billto" (ngSubmit)="onSubmit()">
+    <md-card>
+      <md-input-container class="example-full-width">
+        <input mdInput placeholder="Lab ID" disabled value="21463004">
+      </md-input-container>
+
+      <md-select align="start" [(ngModel)]="selectedAccountId" ng-model-options="{trackBy: 'account.AccountID'}" (change)="onChangeAccount()" formControlName="SelectedAccountCode" placeholder="Select Account" class="example-full-width">
+      <md-option *ngFor="let account of billtoList" [value]="account.AccountID" >
+        {{ account.AccountCode }} [{{account.BusinessName}}]
+      </md-option>
+    </md-select>
+<table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput formControlName="AccountCode" placeholder="#Account">
+          </md-input-container>
+        </td>
+      </tr>
+    </table>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input formControlName="BusinessName" mdInput placeholder="Business Name">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput formControlName="FirstName" placeholder="First name">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput formControlName="LastName" placeholder="Last Name">
+          </md-input-container>
+        </td>
+      </tr>
+    </table>
+
+    <table class="example-half-width" cellspacing="2">
+      <tr>
+
+
+      </tr>
+    </table>
+
+    <p>
+      <md-input-container class="example-full-width">
+        <textarea mdInput formControlName="Address" placeholder="Address"></textarea>
+      </md-input-container>
+    </p>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-select align="start" formControlName="Country" placeholder="Country" class="example-full-width">
+            <md-option *ngFor="let account of accounts" [value]="account.value">
+              {{ account.viewValue }}
+            </md-option>
+          </md-select>
+        </td>
+        <td>
+          <md-select align="start" formControlName="State" placeholder="State" class="example-full-width">
+            <md-option *ngFor="let account of accounts" [value]="account.value">
+              {{ account.viewValue }}
+            </md-option>
+          </md-select>
+        </td>
+      </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <md-input-container  class="example-full-width">
+            <input mdInput placeholder="City" formControlName="CityName">
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput formControlName="Zip" #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+            <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+          </md-input-container>
+        </td>
+      </tr>
+      <!--<md-input-container class="example-full-width">
+              <input mdInput [mdDatepicker]="picker" placeholder="Sampled Date">
+              <button mdSuffix [mdDatepickerToggle]="picker"></button>
+            </md-input-container>
+            <md-datepicker #picker></md-datepicker>-->
+
+      <tr>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput #phone formControlName="Phone"  type="number"  maxlength="10" placeholder="Phone">
+            <md-hint align="end">{{phone.value.length}} / 10</md-hint>
+            <md-error>Please enter valid phone</md-error>            
+          </md-input-container>
+        </td>
+        <td>
+          <md-input-container class="example-full-width">
+            <input mdInput #fax formControlName="Fax" type="tel" maxlength="10" placeholder="Fax" value="">
+            <md-hint align="end">{{fax.value.length}} / 10</md-hint>
+            <md-error>Please enter valid fax</md-error>
+          </md-input-container>
+        </td>
+      </tr>
+    </table>
+    <div class="button-row">
+      <button md-raised-button color="primary" type="submit" [disabled]="!billto.valid">Previous</button>
+      <button md-raised-button color="primary">Next</button>
+    </div>
+
+    </md-card>
+  </form>
+</section>

@@ -38,3 +38,36 @@ a {
     md-spinner.show {
       opacity: 1.0;
     }
+
+.btn-space {
+    margin-right: 5px;
+}
+
+.button-row{
+  text-align: right;
+  position: relative; 
+}
+
+
+md-card{
+    max-width: 80%;    
+    text-align: center;
+    margin-top: 0em;
+    margin-right: auto;
+    margin-bottom: 2em;
+    margin-left: auto;
+}
+
+.example-form {
+  width: 100%;
+  line-height: 60px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-half-width {
+  width: 50%;
+  text-align: left;
+}

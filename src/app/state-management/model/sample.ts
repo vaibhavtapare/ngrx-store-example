@@ -1,8 +1,9 @@
+import { BillTo } from './billto';
 export class Sample {
     constructor(SampleID: number,
         LabID: number,
         Batch: number,
-        Code: number,
+        Code: number,        
         NIRClassID: number,
         ChemClassID: number,
         AGClassID: number,

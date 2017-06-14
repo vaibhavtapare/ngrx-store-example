@@ -1,3 +1,4 @@
+import { BillTo } from './../model/billto';
 import { Sample } from './../model/sample';
 import { WorkingBatchSamples } from './../model/workingBatchSamples';
 
@@ -10,6 +11,7 @@ export interface State{
     sample: Sample; 
     affiliate:string; 
     loading:boolean;
+    billto:BillTo[];
 }
 
 export const initialState: State = {
@@ -20,4 +22,5 @@ export const initialState: State = {
     sample: null,
     affiliate:'', 
     loading:false,
+    billto: []
 }; 

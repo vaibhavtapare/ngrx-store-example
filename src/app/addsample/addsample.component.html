@@ -1,3 +1,53 @@
-<p>
-  addsample works!
-</p>
+  <md-toolbar color="primary">
+    <!--<span><md-icon>mood</md-icon></span>-->
+
+    <span>Add Sample</span>
+
+    <!--<button md-icon-button [md-menu-trigger-for]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>-->
+  </md-toolbar>
+
+<md-tab-group >
+  <md-tab label="BillTo/CopyTo">
+    <app-billto></app-billto>
+  </md-tab>
+  <md-tab label="Sample Details">
+    <app-sampledetails></app-sampledetails>
+  </md-tab>
+  <md-tab label="Package Selection">
+    <app-packageselection></app-packageselection>
+  </md-tab>
+
+  <md-tab label="Analysis Options">
+    <app-analysisoptions></app-analysisoptions>
+  </md-tab>
+
+  <md-tab label="Submission Summary">
+    <app-submissionsummary></app-submissionsummary>
+  </md-tab>
+</md-tab-group>
+
+
+
+<!--<md-tab-group>
+  <md-tab label="BillTo/CopyTo">
+    <app-billto></app-billto>
+  </md-tab>
+  <md-tab label="Sample Details">
+    <app-sampledetails></app-sampledetails>
+  </md-tab>
+
+  <md-tab label="Package Selection">
+    <app-packageselection></app-packageselection>
+  </md-tab>
+
+  <md-tab label="Analysis Options">
+    <app-analysisoptions></app-analysisoptions>
+  </md-tab>
+
+  <md-tab label="Submission Summary">
+    <app-submissionsummary></app-submissionsummary>
+  </md-tab>
+
+</md-tab-group>-->
