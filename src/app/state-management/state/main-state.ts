@@ -1,3 +1,4 @@
+import { Country } from './../model/country';
 import { BillTo } from './../model/billto';
 import { Sample } from './../model/sample';
 import { WorkingBatchSamples } from './../model/workingBatchSamples';
@@ -12,6 +13,9 @@ export interface State{
     affiliate:string; 
     loading:boolean;
     billto:BillTo[];
+    countries:Country[];
+    currentBillTo:BillTo; 
+    selectedTabIndex: number; 
 }
 
 export const initialState: State = {
@@ -22,5 +26,8 @@ export const initialState: State = {
     sample: null,
     affiliate:'', 
     loading:false,
-    billto: []
+    billto: [], 
+    countries:[],
+    currentBillTo:null, 
+    selectedTabIndex:0
 }; 

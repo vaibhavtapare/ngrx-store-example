@@ -8,12 +8,12 @@
     </button>-->
   </md-toolbar>
 
-<md-tab-group >
-  <md-tab label="BillTo/CopyTo">
+<md-tab-group [selectedIndex]="selectedIndex" #addsampleTab  (selectChange)="tabChanged(addsampleTab)" >
+  <md-tab  label="BillTo/CopyTo">
     <app-billto></app-billto>
   </md-tab>
-  <md-tab label="Sample Details">
-    <app-sampledetails></app-sampledetails>
+  <md-tab  label="Sample Details">
+    <app-billto></app-billto>
   </md-tab>
   <md-tab label="Package Selection">
     <app-packageselection></app-packageselection>

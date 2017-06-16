@@ -20,24 +20,24 @@ export class BatchesComponent implements OnInit {
   showLoading: boolean = false;
 
   constructor(private store: Store<State>, private router: Router, private loaderService: LoaderService) {
-    console.log('We have a store! ' + store);
+    //console.log('We have a store! ' + store);
    
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        ////debugger;
+        //////debugger;
         this.workingBatches = <Batches[]>data.batches;
         this.samples = <WorkingBatchSamples[]>data.samples;
         //this.msg = data.message;
-        //////////debugger; 
+        ////////////debugger; 
         this.searching = data.loading;
-        console.log(this.workingBatches);
+        //console.log(this.workingBatches);
         if (this.searching === true) {
-          ////debugger;
+          //////debugger;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          ////debugger;
+          //////debugger;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
@@ -46,17 +46,17 @@ export class BatchesComponent implements OnInit {
     // setTimeout(() => {
     //   //this.store.dispatch({ type: INCREMENT, payload: { innerObj: { text: "derp!" } } });
     //   // this.store.dispatch({ type: "SUPER_SIMPLE_EFFECT", payload: { seconds: 2 } });
-    //   // this.store.dispatch({ type: "SEND_PAYLOAD_TO_EFFECT", payload: { message: "The component says hello!" } })
+       this.store.dispatch({ type: "SEND_PAYLOAD_TO_EFFECT", payload: { message: "The component says hello!" } })
     //   // this.store.dispatch({ type: "SET_TIMER", payload: { seconds: 10 } });
     //   //this.store.dispatch({ type: "PULL_ARRAY_FROM_FIREBASE"});
-    //   //this.store.dispatch({ type: "PULL_OBJECT_FROM_FIREBASE"});
+       //this.store.dispatch({ type: "PULL_OBJECT_FROM_FIREBASE"});
     //   this.store.dispatch({ type: "PULL_WORKING_BATCHES" });
     // }, 5000);
 
   }
 
    onAddSample(selectedBatch, selectedCode) {
-    //console.log('Add Sample Clicked');
+    ////console.log('Add Sample Clicked');
     //alert('Add sample Clicked');
      //this.router.navigate(['sample/', this.selectedBatch, selectedCode.innerText]);
     //alert(selectedBatch.innerText + selectedCode.innerText); 
@@ -71,7 +71,7 @@ export class BatchesComponent implements OnInit {
 
 
   ngOnInit() {
-    ////debugger;
+    //////debugger;
     if (this.workingBatches.length === 0) {
       this.store.dispatch({ type: "PULL_WORKING_BATCHES" });
     }

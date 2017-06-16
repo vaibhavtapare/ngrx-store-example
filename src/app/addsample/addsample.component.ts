@@ -1,24 +1,68 @@
+import { Country } from './../state-management/model/country';
+import { BillTo } from './../state-management/model/billto';
+import { LoaderService } from './../state-management/loader/loader.service';
+import { State } from 'app/state-management/state/main-state';
+import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {TabsModule} from "ng2-tabs";
+import { TabsModule } from "ng2-tabs";
 
 @Component({
   selector: 'app-addsample',
   templateUrl: './addsample.component.html',
   styleUrls: ['./addsample.component.css']
 })
-export class AddsampleComponent implements OnInit , OnDestroy {
- labid: number; 
- private sub: any;
-  constructor(private route: ActivatedRoute) { }
+export class AddsampleComponent implements OnInit, OnDestroy {
+  labid: number;
+  private sub: any;
+  selectedIndex: number = 0;
+  searching = false;
+  billtoList: BillTo[];
+  countries: Country[];
+  constructor(private route: ActivatedRoute, private store: Store<State>, private loaderService: LoaderService) {
 
-   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.labid = +params['labid']; // (+) converts string 'id' to a number
-    });    
+
+    store.select('mainStoreReducer')
+      .subscribe((data: State) => {
+        debugger;
+        this.billtoList = data.billto;
+        this.searching = data.loading;
+        this.countries = data.countries;
+        this.selectedIndex = data.selectedTabIndex;
+
+        if (this.searching === true) {
+          //////debugger;
+          //this.showLoading = true;
+          this.loaderService.display(true);
+        }
+        else {
+          //////debugger;
+          //this.showLoading = false;
+          this.loaderService.display(false);
+        }
+      })
+
   }
 
-   ngOnDestroy() {
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.labid = +params['labid']; // (+) converts string 'id' to a number
+    });
+  }
+
+
+  tabChanged(tab) {
+    debugger;
+    this.selectedIndex = tab._selectedIndex;
+    console.log('Tab Changed: ', tab);
+
+    //let textLabel = event.tab.textLabel.toString();
+    // if (textLabel.includes('+')) {     
+    //   this.selectedIndex = this.orders.length - 1;
+    // }
+    return false;
+  }
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }
