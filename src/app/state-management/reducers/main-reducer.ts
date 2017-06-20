@@ -8,14 +8,16 @@ import { INCREMENT, EVENT_FROM_EFFECT } from './../actions/main-action-creator';
 import { State, initialState } from './../state/main-state';
 import { ActionReducer, Action } from '@ngrx/store';
 import * as deepFreeze from 'deep-freeze-strict';
+import { deserialize, serialize } from 'json-typescript-mapper';
+import update from 'react-addons-update';
 
 export const mainStoreReducer: ActionReducer<State> =
     (state = initialState, action: Action) => {
 
-        deepFreeze(state);
+        // deepFreeze(state);
 
         //console.log('Action came in! ' + action.type);
-        ////////debugger;
+        //////////debugger;;
         switch (action.type) {
             case INCREMENT: {
                 //console.log('the payload string is: ' + action.payload.innerObj.text);
@@ -35,10 +37,10 @@ export const mainStoreReducer: ActionReducer<State> =
 
 
             case "GOT_FIREBASE_ARRAY": {
-                //////debugger;
+                ////////debugger;;
                 //console.log("got array payload from effect: " + action.payload.pulledArray);
                 if (action.payload.pulledArray != undefined) {
-                    //////debugger;
+                    ////////debugger;;
                     let payloadArray = <Batches[]>action.payload.pulledArray;
                     //console.log("got payload from effect: " + payloadArray);
                     //console.log("first element is: " + payloadArray[0]['Batch']);
@@ -52,7 +54,7 @@ export const mainStoreReducer: ActionReducer<State> =
             }
 
             case "GOT_FIREBASE_OBJECT": {
-                //////debugger;
+                ////////debugger;;
                 if (action.payload.pulledObject != undefined) {
                     let payloadObject = <Batches[]>action.payload.pulledObject;
                     //console.log("got object payload from effect: " + payloadObject);
@@ -77,7 +79,7 @@ export const mainStoreReducer: ActionReducer<State> =
                     let payloadObject = <Batches[]>action.payload.workingBatchObject;
                     //console.log("got object payload from effect: " + payloadObject);
                     // //console.log("first element is: " + payloadObject);
-                    //////debugger; 
+                    ////////debugger;; 
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
                     this.samplesData = this.serviceResponce.Data.toString();
@@ -105,7 +107,7 @@ export const mainStoreReducer: ActionReducer<State> =
                     let payloadObject = <WorkingBatchSamples[]>action.payload.workingBatchObject;
                     //console.log("got object payload from effect: " + payloadObject);
                     // //console.log("first element is: " + payloadObject);
-                    //////debugger; 
+                    ////////debugger;; 
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
                     this.samplesData = this.serviceResponce.Data.toString();
@@ -129,13 +131,13 @@ export const mainStoreReducer: ActionReducer<State> =
 
 
             case "GOT_SAMPLE_DETAILS": {
-                ////debugger; 
+                //////debugger;; 
                 if (action.payload.sampleDetailsObject != undefined) {
                     let serviceResponce: ServiceResponce;
                     let payloadObject = <Sample[]>action.payload.sampleDetailsObject;
                     //console.log("got object payload from effect: " + payloadObject);
                     // //console.log("first element is: " + payloadObject);
-                    //debugger;
+                    ////debugger;;
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
                     this.samplesData = this.serviceResponce.Data;
@@ -158,13 +160,33 @@ export const mainStoreReducer: ActionReducer<State> =
                 }
             }
 
+            case "GOT_ADD_SAMPLE": {
+                //debugger; 
+                if (action.payload.sampleObject != undefined) {
+                    return {
+                        displayText: state.displayText,
+                        counter: state.counter + 100,
+                        samples: state.samples,
+                        batches: state.batches,
+                        affiliate: 'HAG',
+                        sample: action.payload.sampleObject,
+                        currentBillTo: state.currentBillTo,
+                        selectedTabIndex: state.selectedTabIndex,
+                        loading: false
+                    };
+                }
+                else {
+                    return state;
+                }
+            }
+
             case "GOT_BILLTO_ACCOUTS": {
                 if (action.payload.billtoListObject != undefined) {
                     let serviceResponce: ServiceResponce;
                     let payloadObject = <Sample[]>action.payload.billtoListObject;
                     //console.log("got object payload from effect: " + payloadObject);
                     // //console.log("first element is: " + payloadObject);
-                    //////debugger; 
+                    //debugger;;
                     this.getData = JSON.stringify(payloadObject || null)
                     this.serviceResponce = <ServiceResponce>JSON.parse(this.getData);
                     this.samplesData = this.serviceResponce.Data.toString();
@@ -198,7 +220,7 @@ export const mainStoreReducer: ActionReducer<State> =
                     let payloadObject = <Sample[]>action.payload.countriesObject;
                     //console.log("got object payload from effect: " + payloadObject);
                     // //console.log("first element is: " + payloadObject);
-                    ////debugger; 
+                    //////debugger;; 
                     this.getData = JSON.stringify(payloadObject || null)
                     this.jsonArray = <Country>JSON.parse(this.getData);
                     //this.samplesData = this.serviceResponce.Data.toString();
@@ -224,29 +246,34 @@ export const mainStoreReducer: ActionReducer<State> =
 
             }
             case "GOT_ADD_SAMPLE_BILLTO": {
-                let obj: any;
+                debugger;
+
                 if (action.payload.Billto != undefined) {
-                    debugger;
-
-                    console.log(action.payload.Billto);
-
+                    let nextTabIndex = 0; 
                     this.nextIndex = action.payload.nextIndex;
-
-                    // let countriesList: Country[];
-                    // let payloadObject = <Sample[]>action.payload.countriesObject;
-                    // //console.log("got object payload from effect: " + payloadObject);
-                    // // //console.log("first element is: " + payloadObject);
-                    // ////debugger; 
-                    // this.getData = JSON.stringify(payloadObject || null)
-                    // this.jsonArray  = <Country>JSON.parse(this.getData);
-                    // //this.samplesData = this.serviceResponce.Data.toString();
-                    // //this.jsonArray = JSON.parse(this.serviceResponce);
-                    //debugger; 
-                    // Object.assign(new BillTo(), state.currentSample.BillTo, {
-                    //     BillTo: obj
-                    // });
-
-
+                    const newCollection = update(state.sample, { BillTo: { $set: action.payload.Billto } });
+                    //state.sample = new Sample(); 
+                    ///setTimeout(()=> nextTabIndex=1, 5000);
+                    return {
+                        counter: state.counter + 100,
+                        samples: state.samples,
+                        batches: state.batches,
+                        affiliate: 'HAG',
+                        sample: newCollection,
+                        currentBillTo: action.payload.Billto,
+                        countries: state.countries,
+                        billto: state.billto,
+                        selectedTabIndex: 1,
+                        loading: false,
+                        //currentSample: state.currentSample.BillTo
+                    };
+                }
+                else {
+                    return state;
+                }
+            }
+            case "GOT_SELECTED_INDEX_OF_TAB": {
+                if (action.payload.objIndex != undefined) {
                     return {
                         counter: state.counter + 100,
                         samples: state.samples,
@@ -256,19 +283,17 @@ export const mainStoreReducer: ActionReducer<State> =
                         currentBillTo: action.payload.Billto,
                         countries: state.countries,
                         billto: state.billto,
-                        selectedTabIndex: this.nextIndex,
+                        selectedTabIndex: action.payload.objIndex,
                         loading: false,
-
                         //currentSample: state.currentSample.BillTo
                     };
                 }
                 else {
                     return state;
                 }
-
             }
             case "SHOW_LOADING_RESPOND": {
-                ////debugger;
+                //////debugger;;
                 if (action.payload.loading != undefined) {
                     return {
                         displayText: 'Loading',

@@ -24,20 +24,20 @@ export class BatchesComponent implements OnInit {
    
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        //////debugger;
+        ////////debugger;;
         this.workingBatches = <Batches[]>data.batches;
         this.samples = <WorkingBatchSamples[]>data.samples;
         //this.msg = data.message;
-        ////////////debugger; 
+        //////////////debugger;; 
         this.searching = data.loading;
         //console.log(this.workingBatches);
         if (this.searching === true) {
-          //////debugger;
+          ////////debugger;;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          //////debugger;
+          ////////debugger;;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
@@ -71,7 +71,7 @@ export class BatchesComponent implements OnInit {
 
 
   ngOnInit() {
-    //////debugger;
+    ////////debugger;;
     if (this.workingBatches.length === 0) {
       this.store.dispatch({ type: "PULL_WORKING_BATCHES" });
     }

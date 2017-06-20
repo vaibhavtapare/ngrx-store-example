@@ -23,7 +23,7 @@ export const initialState: State = {
     displayText: 'loading...', 
     batches:[], 
     samples:[], 
-    sample: null,
+    sample:null,
     affiliate:'', 
     loading:false,
     billto: [], 

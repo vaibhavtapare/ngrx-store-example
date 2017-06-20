@@ -67,7 +67,7 @@ export class MainEffects {
         .switchMap(() => {
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetWorkingBatches/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20/HAG')
                 .switchMap(result => {
-                    //////debugger;
+                    ////////debugger;;
                     return Observable.of({ type: "GOT_WORKING_BATCHES", payload: { workingBatchObject: result.json() } })
                 })
         })
@@ -77,7 +77,7 @@ export class MainEffects {
         .do(() => this.store.dispatch({ type: "SHOW_LOADING" }))
         .map(toPayload)
         .switchMap(toPayload => {
-            ////debugger;
+            //////debugger;;
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetSamplesForUser/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20/' + toPayload.Batch)
                 .switchMap(result => {
 
@@ -93,7 +93,7 @@ export class MainEffects {
         .switchMap(toPayload => {
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetSamplesDetails/' + toPayload.LabID + '/' + toPayload.affiliate)
                 .switchMap(result => {
-                    //////debugger;
+                    ////////debugger;;
                     return Observable.of({ type: "GOT_SAMPLE_DETAILS", payload: { sampleDetailsObject: result.json() } })
                 })
         })
@@ -105,7 +105,7 @@ export class MainEffects {
         .switchMap(toPayload => {
             return this._http.get('http://stgcvassamplemanagerservice.foragelab.com/SampleSubmission.svc/GetBillToAccountForAccount/5ea5fd34-8259-4aaf-ab59-c6fb2a187c20')
                 .switchMap(result => {
-                    ////debugger;
+                    //////debugger;;
                     return Observable.of({ type: "GOT_BILLTO_ACCOUTS", payload: { billtoListObject: result.json() } })
                 })
         })
@@ -117,11 +117,11 @@ export class MainEffects {
         .switchMap(toPayload => {
             return this._http.get('app/assets/data/CountryState.xml')
                 .switchMap(result => {
-                    ////debugger;
+                    //////debugger;;
                     var outJson;
                     var xml = result.text();
                     xml2js.parseString(xml, function (err, result) {
-                        ////debugger;
+                        //////debugger;;
                         outJson = result.countries.country;
                     });
                     return Observable.of({ type: "GOT_COUNTRIES", payload: { countriesObject: outJson } })
@@ -141,12 +141,33 @@ export class MainEffects {
     @Effect() setBilltoDetailsToCurrentSample = this.action$
         .ofType('SET_ADD_SAMPLE_BILLTO')
         .map(toPayload)
+        .do(() =>  this.store.dispatch({ type: "SHOW_LOADING" }))
+        .switchMap(toPayload => {
+            //console.log('the payload was : ' + payload.message);
+            //debugger;;
+            return Observable.of({ type: "GOT_ADD_SAMPLE_BILLTO", payload: { Billto: toPayload.Billto, nextIndex: toPayload.nextIndex } })
+        });
+
+     @Effect() setSelectedIndexOfTab = this.action$
+        .ofType('SET_SELECTED_INDEX_OF_TAB')
+        .map(toPayload)
+        //.do(() => this.store.dispatch({ type: "SHOW_LOADING" }))
+        .switchMap(toPayload => {
+            //console.log('the payload was : ' + payload.message);
+            //debugger;;
+            return Observable.of({ type: "GOT_SELECTED_INDEX_OF_TAB", payload: { objIndex: toPayload.nextIndex } })
+        });
+
+    @Effect() setAddSample = this.action$
+        .ofType('SET_ADD_SAMPLE')
+        .map(toPayload)
         .do(() => this.store.dispatch({ type: "SHOW_LOADING" }))
         .switchMap(toPayload => {
             //console.log('the payload was : ' + payload.message);
-            debugger;
-            return Observable.of({ type: "GOT_ADD_SAMPLE_BILLTO", payload: { Billto: toPayload.Billto, nextIndex: toPayload.nextIndex } })
+            //debugger;;
+            return Observable.of({ type: "GOT_ADD_SAMPLE", payload: { sampleObject: toPayload.Sample } })
         });
+
 
 }
 

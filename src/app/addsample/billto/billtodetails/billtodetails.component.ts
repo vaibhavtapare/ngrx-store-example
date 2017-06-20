@@ -1,3 +1,4 @@
+import { Sample } from './../../../state-management/model/sample';
 import { States } from './../../../state-management/model/state';
 import { Country } from './../../../state-management/model/country';
 import { BillTo } from './../../../state-management/model/billto';
@@ -23,9 +24,12 @@ export class BilltodetailsComponent implements OnInit {
   countries: Country[];
   allcountries: string[];
   currentSelectedCountry: string;
+  currentSelectedAccountCode:number=0; 
   selectedCountry: Country;
   states: string[]
   arrStates: States[] = [];
+  currentSample: Sample;
+  isSubmitted: boolean = false;
   // public billtoForm = new FormGroup({
   selectedAccountCode = new FormControl("")
   accountCode = new FormControl("")
@@ -43,8 +47,9 @@ export class BilltodetailsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private store: Store<State>, private router: Router, private loaderService: LoaderService) {
     this.billto = fb.group({
-      "SelectedAccountCode": ["VAI-001"],
-      "SelectedCountry": [""],
+      //"SelectedAccountCode": ["VAI-001"],
+      //"SelectedCountry": [""],
+      "AccountID": ["", Validators.required],
       "AccountCode": ["", Validators.required],
       "FirstName": ["", Validators.required],
       "BusinessName": ["", Validators.required],
@@ -61,26 +66,39 @@ export class BilltodetailsComponent implements OnInit {
 
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        ////debugger;
+        //////debugger;;
         this.billtoList = data.billto;
         this.searching = data.loading;
         this.countries = data.countries;
+        this.currentSample = data.sample;
+        //debugger;
+        // if (this.currentSample !== undefined) {
+        //   debugger
+        //   if (this.isSubmitted === true) {
+        //     this.isSubmitted = false;
+        //    // this.store.dispatch({ type: "SET_SELECTED_INDEX_OF_TAB", payload: { nextIndex: 1 } })
+
+        //   }
+        // }
         if (this.searching === true) {
-          //////debugger;
+          ////////debugger;;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          //////debugger;
+          ////////debugger;;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
       })
+    //debugger;
+
+
 
   }
 
   ngOnInit() {
-    //////debugger;
+    ////////debugger;;
 
     this.store.dispatch({ type: "PULL_COUNTRIES" });
     this.store.dispatch({ type: "PULL_BILLTO_ACCOUTS" });
@@ -90,10 +108,13 @@ export class BilltodetailsComponent implements OnInit {
   }
   onSubmit() {
     //console.log(this.billto.status);
-    //console.log("model-based form submitted");
-    debugger;
-    console.log(this.billto);
+    //console.log("model-based form submitted"); 
+    //debugger;;
+    // debugger;
+    // console.log(this.billto);
+    // this.isSubmitted = true;
     this.store.dispatch({ type: "SET_ADD_SAMPLE_BILLTO", payload: { Billto: this.billto.value, nextIndex: 1 } });
+
     //this.selectedIndex=1;
     //this.store.dispatch({ type: INCREMENT, payload: { innerObj: { text: "derp!" } } });
   }
@@ -101,14 +122,16 @@ export class BilltodetailsComponent implements OnInit {
 
   onChangeAccount(event) {
     //console.log(this.selectedAccountId);
-    //debugger;
-    if (this.selectedAccountId > 0) {
-      this.selectedBillTo = this.billtoList.find(x => x.AccountID == this.selectedAccountId);
-      //debugger;
+    debugger;;
+    if (this.currentSelectedAccountCode > 0) {
+      this.selectedBillTo = this.billtoList.find(x => x.AccountID == this.currentSelectedAccountCode);
+      ////debugger;;
+      this.currentSelectedAccountCode =this.selectedBillTo.AccountID;
+
       (<FormGroup>this.billto)
         .setValue({
-          SelectedAccountCode: this.selectedBillTo.AccountID,
-          SelectedCountry: this.selectedBillTo.Country,
+          AccountID: this.selectedBillTo.AccountID,
+          ///SelectedCountry: this.selectedBillTo.Country,
           AccountCode: this.selectedBillTo.AccountCode,
           FirstName: this.selectedBillTo.FirstName,
           LastName: this.selectedBillTo.LastName,
@@ -126,15 +149,15 @@ export class BilltodetailsComponent implements OnInit {
 
   onChangeCountry() {
     //console.log(this.currentSelectedCountry);
-    //debugger;
+    ////debugger;;
     if (this.currentSelectedCountry != "") {
-      //debugger;
+      ////debugger;;
       if (this.countries != undefined) {
         //this.selectedCountry = this.countries.find(x => x.CountryName == this.currentSelectedCountry);
         this.states = [];
         for (var i = 0; i < this.countries.length; i++) {
           if (this.currentSelectedCountry == this.countries[i]['$'].name) {
-            debugger;
+            //debugger;;
             this.states = this.countries[i]["state"];
           }
         }
@@ -143,10 +166,7 @@ export class BilltodetailsComponent implements OnInit {
         for (var i = 0; i < this.states.length; i++) {
           this.arrStates.push({ StateName: this.states[i] });
         }
-
       }
-
     }
-
   }
 }
