@@ -8,7 +8,7 @@
     </button>-->
   </md-toolbar>
 
-<md-tab-group [(selectedIndex)]="selectedIndex"  >
+<md-tab-group [(selectedIndex)]="selectedIndex" #billtotab (selectChange)="tabChanged(billtotab)">
   <md-tab  label="BillTo/CopyTo">
     <app-billto></app-billto>
   </md-tab>

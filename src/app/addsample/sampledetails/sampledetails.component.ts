@@ -9,22 +9,58 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class SampledetailsComponent implements OnInit {
   sampleDetails: FormGroup;
-  constructor(private fb: FormBuilder, private store: Store<State>) {
-    
+  sourceGroupOptionList: any;
+  farmList: any;
+  currentSelectedSourcegroup: string;
+  currentSelectedFeedCode: string;
+  feedCodeList: any;
+  currentSelectedGeneralClass: string;
+  generalClassList: any;
+  feedTypeList: any;
+  currentSelectedFeedType: string;
+  currentSelectedSampleVolume: string;
+  sampleVolumeList: any;
+  currentSelectedCutting: any;
+  cuttingList: any;
+  receivingConditionsList:any; 
+  currentSelectedReceivingConditions: string;
+  currentSelectedYear: string; 
+  yearList: any; 
+  isProcessed: boolean = false; 
+  isPreground: boolean= false; 
+  HandlingFeeIncluded: boolean =false;
 
-     this.sampleDetails = fb.group({
-      
+
+  constructor(private fb: FormBuilder, private store: Store<State>) {
+
+
+    this.sampleDetails = fb.group({
+
       "FarmName": ["", Validators.required],
-      "FirstName": ["", Validators.required],
-      "BusinessName": ["", Validators.required],
-      "LastName": ["", Validators.required],
-      "Address": ["", Validators.required],
-      "Country": [""],
-      "State": [""],
-      "CityName": ["", Validators.required],
-      "Zip": ["", Validators.required],
-      "Phone": ["", Validators.required],
-      "Fax": ["", Validators.required]
+      "SourceGroupOption": ["", Validators.required],
+      "FeedClass": ["", Validators.required],
+      "CollectedDate": ["", Validators.required],
+      "SampledDate": ["", Validators.required],
+      "ShippedDate": ["", Validators.required],
+      "SampleDescription": ["", Validators.required],
+      "Memo": ["", Validators.required],
+      "ReportingMemo": ["", Validators.required],
+      "SampleVolume": ["", Validators.required],
+      "ReceivingConditions": ["", Validators.required],
+      "Year": ["", Validators.required],
+      "Postage": ["", Validators.required],
+      "isHandlingFeeIncluded": ["", Validators.required],
+      "isFermented": ["", Validators.required],
+      "isEarlyRelease": ["", Validators.required],
+      "Processed": ["", Validators.required],
+      "LDAS": ["", Validators.required],
+      "Wet": ["", Validators.required],
+      "LNIR": ["", Validators.required],
+      "LCAP": ["", Validators.required],
+      "Cutting": [""],
+      "CuttingInterval": [], 
+      "NIRClass":[]
+
     });
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
@@ -42,9 +78,9 @@ export class SampledetailsComponent implements OnInit {
   }
 
   GotoBillto() {
-    debugger; 
+    debugger;
     this.store.dispatch({ type: "SET_SELECTED_INDEX_OF_TAB", payload: { nextIndex: 0 } })
-    return false; 
+    return false;
   }
 
 }

@@ -22,6 +22,12 @@ a {
     float: right;
 }
 
+
+md-checkbox.dynamic-color-checkbox {
+    width: 30px;
+    height: 30px;
+}
+
  md-card-spinner {
       padding-left: 60px; 
     }
@@ -44,8 +50,17 @@ a {
 }
 
 .button-row{
+  /*clear: both; */
   text-align: right;
   position: relative; 
+
+
+  
+}
+
+.tabTop
+{
+    padding-top:0px !important;      
 }
 
 
@@ -58,16 +73,67 @@ md-card{
     margin-left: auto;
 }
 
+
+.packageSelection{
+    max-width: 100%;    
+    text-align: center;
+    margin-top: 0em;
+    margin-right: auto;
+    margin-bottom: 2em;
+    margin-left: auto;
+}
 .example-form {
   width: 100%;
-  line-height: 60px;
+  line-height: 50px;
 }
 
 .example-full-width {
   width: 100%;
+  padding-right: 20px;
 }
+
+/*
+.example-half-width{
+  width: 60%;
+  padding-right: 20px;
+}*/
 
 .example-half-width {
   width: 50%;
   text-align: left;
 }
+
+/*.threeColumn{
+  width: 33%;
+}*/
+.threeColumn{
+  width: 25%;
+  text-align: left;
+  line-height: 50px;
+}
+
+.twoColumn{
+  width: 50%;
+}
+.chkBoxStyle{
+  width: 10px; 
+  height: 10px; 
+  float: left;
+}
+.checkboxContainer
+{
+  text-align: left; 
+  padding-bottom: 1px
+}
+
+.checkboxRow{
+  line-height:50px; 
+  /*float: left;*/
+}
+
+.quickSubmission{
+  float: left; 
+
+}
+
+

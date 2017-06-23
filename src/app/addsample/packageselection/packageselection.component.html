@@ -1,107 +1,109 @@
 <div>
- 
-  <md-card>
-    <form class="example-form">
-      <md-input-container class="example-full-width">
-        <input mdInput placeholder="Company (disabled)" disabled value="Google">
-      </md-input-container>
+  <md-card class="tabTop">
+    <form class="example-form"  (ngSubmit)="onSubmit()">
+      <md-tab-group [selectedIndex]="packageSelectedIndex"  (selectChange)="tabChanged(addsampleTab)">
+        <md-tab label="NIR">
+          <ng2-md-datatable selectable="true">
+        <ng2-md-datatable-header>
+          <ng2-md-datatable-column sortableValue="article">Package</ng2-md-datatable-column>
+          <ng2-md-datatable-column sortableValue="product">Domestic</ng2-md-datatable-column>
+        </ng2-md-datatable-header>
+        <tbody>
+          <ng2-md-datatable-row selectableValue="NIR 1">
+            <td>NIR 1</td>
 
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="First name">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Long Last Name That Will Be Truncated">
-            </md-input-container>
-          </td>
-        </tr>
-      </table>
+            <td class="numeric">$23.2</td>
+          </ng2-md-datatable-row>
+          <ng2-md-datatable-row selectableValue="NIR 2">
+            <td>NIR 2</td>
 
-      <p>
-        <md-input-container class="example-full-width">
-          <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-        </md-input-container>
-        <md-input-container class="example-full-width">
-          <textarea mdInput placeholder="Address 2"></textarea>
-        </md-input-container>
-      </p>
+            <td class="numeric">$12.4</td>
+          </ng2-md-datatable-row>
+          <ng2-md-datatable-row selectableValue="NIR 3">
+            <td>NIR 3</td>
 
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="State">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-              <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
-            </md-input-container>
-          </td>
-        </tr>
-      </table>
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
+            <td class="numeric">$46.4</td>
+          </ng2-md-datatable-row>
+          <ng2-md-datatable-row selectableValue="NIR 4">
+            <td>NIR 4</td>
 
+            <td class="numeric">$24.3</td>
+          </ng2-md-datatable-row>
+        </tbody>
+      </ng2-md-datatable>
+        </md-tab>
+        <md-tab label="Chemistry">
+        <ng2-md-datatable selectable="true">
+        <ng2-md-datatable-header>
+          <ng2-md-datatable-column sortableValue="article">Package</ng2-md-datatable-column>
+          <ng2-md-datatable-column sortableValue="product">Domestic</ng2-md-datatable-column>
+        </ng2-md-datatable-header>
+        <tbody>
+          <ng2-md-datatable-row selectableValue="NIR 1">
+            <td>NIR 1</td>
 
-            <md-input-container class="example-full-width">
-              <input mdInput [mdDatepicker]="picker" placeholder="Sampled Date">
-              <button mdSuffix [mdDatepickerToggle]="picker"></button>
-            </md-input-container>
-            <md-datepicker #picker></md-datepicker>
+            <td class="numeric">$23.2</td>
+          </ng2-md-datatable-row>
+          <ng2-md-datatable-row selectableValue="NIR 2">
+            <td>NIR 2</td>
 
+            <td class="numeric">$12.4</td>
+          </ng2-md-datatable-row>
+          <ng2-md-datatable-row selectableValue="NIR 3">
+            <td>NIR 3</td>
 
-          </td>
+            <td class="numeric">$46.4</td>
+          </ng2-md-datatable-row>
+          <ng2-md-datatable-row selectableValue="NIR 4">
+            <td>NIR 4</td>
 
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-
-        </tr>
-      </table>
+            <td class="numeric">$24.3</td>
+          </ng2-md-datatable-row>
+        </tbody>
+      </ng2-md-datatable>
+        </md-tab>
+      </md-tab-group>
 
 
 
+      
+
+      <!--<table class="table">
+        <thead class="thead-default">
+          <tr>
+            <th>Check</th>
+            <th>Package Name</th>
+            <th>Domestic</th>
+            <th>Internactional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>-->
+       <div class="button-row">
+        <button md-raised-button color="primary" (click)="GotoSampleDetails()">Previous</button>
+        <button md-raised-button color="primary" type="submit">Next</button>
+      </div>
     </form>
-
-    <div class="button-row">
-      <button md-raised-button color="primary">Previous</button>
-      <button md-raised-button color="primary">Next</button>
-    </div>
-
+    
 
   </md-card>
 </div>

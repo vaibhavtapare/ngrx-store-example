@@ -1,98 +1,223 @@
-<section class="sample-app-content">
+<div>
+  <md-card>
+    <form [formGroup]="sampleDetails" class="example-form" (ngSubmit)="onSubmit()">
 
-  <form [formGroup]="sampleDetails" (ngSubmit)="onSubmit()">
-    <md-card>    
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td>
+          <td class="twoColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedFarm" ng-model-options="{trackBy: 'farm.SourceGroup'}" formControlName="FarmName"
+              placeholder="Select Farm" class="example-full-width">
+              <md-option *ngFor="let farm of farmList" [value]="farm.SourceGroup">
+                {{ farm.SourceGroup }}
+              </md-option>
+            </md-select>
+          </td>
+          <td class="twoColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedSourcegroup" ng-model-options="{trackBy: 'sourceGroupOption.SourceGroupOption'}"
+              formControlName="SourceGroupOption" placeholder="Select Option" class="example-full-width">
+              <md-option *ngFor="let sourceGroupOption of sourceGroupOptionList" [value]="sourceGroupOption.SourceGroupOption">
+                {{ sourceGroupOption.SourceGroupOption }}
+              </md-option>
+            </md-select>
+          </td>
+        </tr>
+
+
+
+      </table>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedFeedCode" ng-model-options="{trackBy: 'feedCode.FeedCodeID'}" formControlName="FeedClass"
+              placeholder="Quick Feed" class="example-full-width">
+              <md-option *ngFor="let feedCode of feedCodeList" [value]="feedCode.FeedCodeID">
+                {{ feedCode.FeedCode }}
+              </md-option>
+            </md-select>
+          </td>
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedGeneralClass" ng-model-options="{trackBy: 'generalClass.generalClass'}"
+              formControlName="FeedClass" placeholder="General Class" class="example-full-width">
+              <md-option *ngFor="let generalClass of generalClassList" [value]="generalClass.FeedCodeID">
+                {{ generalClass.generalClass }}
+              </md-option>
+            </md-select>
+          </td>
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedFeedType" ng-model-options="{trackBy: 'feedType.FeedType'}" formControlName="FeedClass"
+              placeholder="Feed Type" class="example-full-width">
+              <md-option *ngFor="let feedType of feedTypeList" [value]="feedType.FeedCodeID">
+                {{ feedType.FeedType }}
+              </md-option>
+            </md-select>
+          </td>
+        </tr>
+      </table>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput placeholder="First name">
+              <input mdInput [mdDatepicker]="pickerSampledDate" formControlName="CollectedDate" placeholder="Sampled Date">
+              <button mdSuffix [mdDatepickerToggle]="pickerSampledDate"></button>
+            </md-input-container>
+            <md-datepicker #pickerSampledDate></md-datepicker>
+
+          </td>
+          <td class="threeColumn">
+            <md-input-container class="example-full-width">
+              <input mdInput [mdDatepicker]="pickerHarvestDate" formControlName="SampledDate" placeholder="Harvest Date">
+              <button mdSuffix [mdDatepickerToggle]="pickerHarvestDate"></button>
+            </md-input-container>
+            <md-datepicker #pickerHarvestDate></md-datepicker>
+
+          </td>
+          <td class="threeColumn">
+            <md-input-container class="example-full-width">
+              <input mdInput [mdDatepicker]="pickerShippedDate" formControlName="ShippedDate" placeholder="Shipped Date">
+              <button mdSuffix [mdDatepickerToggle]="pickerShippedDate"></button>
+            </md-input-container>
+            <md-datepicker #pickerShippedDate></md-datepicker>
+
+          </td>
+        </tr>
+      </table>
+
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td class="threeColumn">
+            <md-input-container class="example-full-width">
+              <textarea mdInput formControlName="SampleDescription" placeholder="Description"></textarea>
             </md-input-container>
           </td>
-          <td>
+          <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput placeholder="Long Last Name That Will Be Truncated">
+              <textarea mdInput formControlName="Memo" placeholder="Memo"></textarea>
+            </md-input-container>
+          </td>
+          <td class="threeColumn">
+            <md-input-container class="example-full-width">
+              <textarea mdInput formControlName="ReportingMemo" placeholder="Reporting Memo"></textarea>
             </md-input-container>
           </td>
         </tr>
       </table>
 
-      <p>
-        <md-input-container class="example-full-width">
-          <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-        </md-input-container>
-        <md-input-container class="example-full-width">
-          <textarea mdInput placeholder="Address 2"></textarea>
-        </md-input-container>
-      </p>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedSampleVolume" ng-model-options="{trackBy: 'sampleVolume.sampleVolumeName'}"
+              formControlName="SampleVolume" placeholder="Sample Volume" class="example-full-width">
+              <md-option *ngFor="let sampleVolume of sampleVolumeList" [value]="sampleVolume.sampleVolumeName">
+                {{ sampleVolume.sampleVolumeName }}
+              </md-option>
+            </md-select>
+          </td>
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedReceivingConditions" ng-model-options="{trackBy: 'cutting.cuttingName'}"
+              formControlName="Cutting" placeholder="Receiving  Condition" class="example-full-width">
+              <md-option *ngFor="let receivingCondition of receivingConditionsList" [value]="receivingCondition.receivingConditionName">
+                {{ receivingCondition.receivingConditionName }}
+              </md-option>
+            </md-select>
+          </td>
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedCutting" ng-model-options="{trackBy: 'cutting.cuttingName'}" formControlName="Cutting"
+              placeholder="Cutting      " class="example-full-width">
+              <md-option *ngFor="let cutting of cuttingList" [value]="cutting.cuttingName">
+                {{ cutting.cuttingName }}
+              </md-option>
+            </md-select>
+
+          </td>
+        </tr>
+      </table>
 
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td>
+          <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
+              <input mdInput placeholder="Postage" formControlName="Postage">
             </md-input-container>
           </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="State">
-            </md-input-container>
+
+          <td class="threeColumn">
+            <md-select align="start" [(ngModel)]="currentSelectedYear" [style.padding-bottom]="'18px'" ng-model-options="{trackBy: 'year'}"
+              formControlName="Year" placeholder="Year" class="example-full-width">
+              <md-option *ngFor="let year of yearList" [value]="year">
+                {{ year }}
+              </md-option>
+            </md-select>
           </td>
-          <td>
+          <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-              <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+              <input formControlName="CuttingInterval" mdInput placeholder="Cutting Interval">
             </md-input-container>
           </td>
         </tr>
       </table>
-      <table class="example-full-width" cellspacing="0">
-        <tr>
-          <td>
 
 
-            <md-input-container class="example-full-width">
-              <input mdInput [mdDatepicker]="picker" placeholder="Sampled Date">
-              <button mdSuffix [mdDatepickerToggle]="picker"></button>
-            </md-input-container>
-            <md-datepicker #picker></md-datepicker>
+      <div class="clear:both"></div>
 
-
-          </td>
-
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-          <td>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="City">
-            </md-input-container>
-          </td>
-
-        </tr>
-      </table>
-      <div class="button-row">      
-        <button md-raised-button color="primary" (click)="GotoBillto()">Previous</button>
-         <button md-raised-button color="primary" type="submit">Next</button>
+      <div class="row" >
+        <div class="col-8" >
+          <md-card class="packageSelection">
+            <tr>
+              <td class="threeColumn">
+                <md-checkbox class="example-margin" formControlName="Processed" [(ngModel)]="isProcessed">Processed</md-checkbox>
+              </td>
+              <td class="threeColumn">
+                <md-checkbox align="start" class="example-margin" formControlName="isHandlingFeeIncluded" [(ngModel)]="isHandlingFeeIncluded">Handling Fee</md-checkbox>
+              </td>
+              <td class="threeColumn">
+                <md-checkbox align="start" class="example-margin" formControlName="LDAS" [(ngModel)]="isPreground">Preground</md-checkbox>
+              </td>
+            </tr>
+            <tr>
+              <td class="threeColumn">
+                <md-checkbox class="example-margin" formControlName="Wet" [(ngModel)]="Wet">Wet</md-checkbox>
+              </td>
+              <td class="threeColumn">
+                <md-checkbox align="start" class="example-margin" formControlName="isFermented" [(ngModel)]="isFermented">Fermented</md-checkbox>
+              </td>
+              <td class="threeColumn">
+                <md-checkbox align="start" class="example-margin" formControlName="isEarlyRelease" [(ngModel)]="isEarlyRelease">Early Release</md-checkbox>
+              </td>
+            </tr>
+         </md-card>
+        </div>
+        <div class="col-4" >
+           <md-card class="packageSelection">
+            <tr class="row">
+              <td class="example-full-width">
+                <md-select align="start" [(ngModel)]="currentSelectedNIR" ng-model-options="{trackBy: 'nirPackage.packageName'}" formControlName="NIRClass"
+                  placeholder="NIR Package">
+                  <md-option *ngFor="let nirPackage of nirPackageList" [value]="nirPackage.packageName">
+                    {{ nirPackage.packageName }}
+                  </md-option>
+                </md-select>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="twoColumn">
+                <md-checkbox class="example-margin" formControlName="LNIR" [(ngModel)]="LNIR">Plus</md-checkbox>
+              </td>
+              <td class="twoColumn">
+                <md-checkbox align="start" class="example-margin" formControlName="LCAP" [(ngModel)]="LCAP">CPM</md-checkbox>
+              </td>
+            </tr>
+           </md-card> 
+        </div>
       </div>
 
-    </md-card>
-  </form>
-</section>
+
+      <div class="button-row">
+        <button md-raised-button color="primary" (click)="GotoBillto()">Previous</button>
+        <button md-raised-button color="primary" type="submit">Next</button>
+      </div>
+
+    </form>
+  </md-card>
+</div>

@@ -25,15 +25,15 @@ export class AddsampleComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private store: Store<State>, private loaderService: LoaderService) {
 
-    
+
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-       // debugger;
+        debugger;
         this.billtoList = data.billto;
         this.searching = data.loading;
         this.countries = data.countries;
         this.selectedIndex = data.selectedTabIndex;
-        
+
         if (this.searching === true) {
           //////debugger;
           //this.showLoading = true;
@@ -46,17 +46,17 @@ export class AddsampleComponent implements OnInit, OnDestroy {
         }
       })
 
-      //   if (this.currentSample.BillTo !== undefined) {
-      //     //////debugger;
-      //     //this.showLoading = true;
-      //     this.loaderService.display(true);
-      //   }
-      //   else {
-      //     //////debugger;
-      //     //this.showLoading = false;
-      //     this.loaderService.display(false);
-      //   }
-      // })
+    //   if (this.currentSample.BillTo !== undefined) {
+    //     //////debugger;
+    //     //this.showLoading = true;
+    //     this.loaderService.display(true);
+    //   }
+    //   else {
+    //     //////debugger;
+    //     //this.showLoading = false;
+    //     this.loaderService.display(false);
+    //   }
+    // })
 
 
 
@@ -67,7 +67,7 @@ export class AddsampleComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.labid = +params['labid']; // (+) converts string 'id' to a number
     });
-    
+
     this.currentSample.LabID = this.labid;
     this.currentSample.Batch = parseInt(this.currentSample.LabID.toString().substring(0, 5));
     this.currentSample.Code = parseInt(this.currentSample.LabID.toString().substring(5, 3));
@@ -77,10 +77,12 @@ export class AddsampleComponent implements OnInit, OnDestroy {
 
 
   tabChanged(tab) {
-    //debugger;
-    
+    debugger;
+
     this.selectedIndex = tab._selectedIndex;
-    console.log('Tab Changed: ', tab);
+    console.log('Tab Changed: ', this.selectedIndex);
+    this.store.dispatch({ type: "SET_SELECTED_INDEX_OF_TAB", payload: { nextIndex: this.selectedIndex } })
+
 
     //let textLabel = event.tab.textLabel.toString();
     // if (textLabel.includes('+')) {     

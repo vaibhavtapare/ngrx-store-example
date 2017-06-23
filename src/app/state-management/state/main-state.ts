@@ -16,6 +16,7 @@ export interface State{
     countries:Country[];
     currentBillTo:BillTo; 
     selectedTabIndex: number; 
+    defaultSelectedIndex: number; 
 }
 
 export const initialState: State = {
@@ -29,5 +30,6 @@ export const initialState: State = {
     billto: [], 
     countries:[],
     currentBillTo:null, 
-    selectedTabIndex:0
+    selectedTabIndex:0, 
+    defaultSelectedIndex:0
 }; 

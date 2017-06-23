@@ -47,7 +47,8 @@ export const mainStoreReducer: ActionReducer<State> =
                     return {
                         displayText: payloadArray['Batch'],
                         counter: state.counter + 100,
-                        batches: payloadArray
+                        batches: payloadArray,
+                        defaultSelectedIndex:0
                     };
                 }
                 return Object.assign(state);
@@ -64,7 +65,8 @@ export const mainStoreReducer: ActionReducer<State> =
                     return {
                         displayText: payloadObject['Batch'],
                         counter: state.counter + 100,
-                        batches: [...state.batches, payloadObject]
+                        batches: [...state.batches, payloadObject],
+                        defaultSelectedIndex:0
 
                     };
                 }
@@ -92,7 +94,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         batches: this.jsonArray,
                         affiliate: 'HAG',
                         currentBillTo: state.currentBillTo,
-                        loading: false
+                        loading: false,
+                        defaultSelectedIndex:0
                     };
                 }
                 else {
@@ -121,7 +124,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         affiliate: 'HAG',
                         currentBillTo: state.currentBillTo,
                         selectedTabIndex: state.selectedTabIndex,
-                        loading: false
+                        loading: false,
+                        defaultSelectedIndex:0
                     };
                 }
                 else {
@@ -152,7 +156,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         sample: this.jsonArray,
                         currentBillTo: state.currentBillTo,
                         selectedTabIndex: state.selectedTabIndex,
-                        loading: false
+                        loading: false,
+                        defaultSelectedIndex:0
                     };
                 }
                 else {
@@ -172,7 +177,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         sample: action.payload.sampleObject,
                         currentBillTo: state.currentBillTo,
                         selectedTabIndex: state.selectedTabIndex,
-                        loading: false
+                        loading: false,
+                        defaultSelectedIndex:0
                     };
                 }
                 else {
@@ -204,7 +210,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         countries: state.countries,
                         currentBillTo: state.currentBillTo,
                         selectedTabIndex: state.selectedTabIndex,
-                        loading: false
+                        loading: false,
+                        defaultSelectedIndex:0
                     };
                 }
                 else {
@@ -237,7 +244,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         countries: this.jsonArray,
                         currentBillTo: state.currentBillTo,
                         selectedTabIndex: state.selectedTabIndex,
-                        loading: false
+                        loading: false,
+                        defaultSelectedIndex:0
                     };
                 }
                 else {
@@ -265,6 +273,7 @@ export const mainStoreReducer: ActionReducer<State> =
                         billto: state.billto,
                         selectedTabIndex: 1,
                         loading: false,
+                        defaultSelectedIndex:0
                         //currentSample: state.currentSample.BillTo
                     };
                 }
@@ -285,6 +294,7 @@ export const mainStoreReducer: ActionReducer<State> =
                         billto: state.billto,
                         selectedTabIndex: action.payload.objIndex,
                         loading: false,
+                        defaultSelectedIndex:0
                         //currentSample: state.currentSample.BillTo
                     };
                 }
@@ -306,7 +316,8 @@ export const mainStoreReducer: ActionReducer<State> =
                         countries: state.countries,
                         currentBillTo: state.currentBillTo,
                         selectedTabIndex: state.selectedTabIndex,
-                        loading: true
+                        loading: true,
+                        defaultSelectedIndex:0
 
                     };
                 }

@@ -28,6 +28,7 @@ import 'hammerjs';
 import { BilltodetailsComponent } from './addsample/billto/billtodetails/billtodetails.component';
 import { CopytodetailsComponent } from './addsample/billto/copytodetails/copytodetails.component';
 import { TabsModule } from 'ng2-tabs'
+import { MdDataTableModule } from 'ng2-md-datatable';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBa6CmVnFn3vTdtyTBNj7GORku5nBM2cS8",
@@ -69,7 +70,8 @@ export const firebaseConfig = {
     MdCheckboxModule,
     TabsModule, 
     MdNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdDataTableModule,
   ],
   providers: [LoaderService],
   bootstrap: [AppComponent]
