@@ -1,5 +1,5 @@
 <div class="outer-outlet">
-    <span *ngIf="showLoader" class="loading">
+  <span *ngIf="showLoader" class="loading">
              <div class="sk-cube-grid">
             <div class="sk-cube sk-cube1"></div>
             <div class="sk-cube sk-cube2"></div>
@@ -12,5 +12,17 @@
             <div class="sk-cube sk-cube9"></div>
 </div>
         </span>
-    <router-outlet></router-outlet>
+  <div>
+   
+      <md-toolbar color="primary" style="text-align: center">
+        <!--<span><md-icon>mood</md-icon></span>-->
+        <span><h1 >Cumberland Valley Analytical Services </h1></span>
+
+        <!--<button md-icon-button [md-menu-trigger-for]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>-->
+      </md-toolbar>
+      <router-outlet></router-outlet>
+  
+  </div>
 </div>

@@ -1,0 +1,89 @@
+
+<div class="row">
+
+      <a href="/dashboard#" (click)="updateRowPosition()">Update Rows</a>
+
+      
+<div class="col-md-8">
+  <h4>Working batches</h4>
+<div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+<ngx-datatable
+        class="material"
+        [rows]="rows"       
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [selected]="selected"
+        [selectionType]="'single'"
+        [loadingIndicator] = "false"
+        (select)='onSelect($event)'
+        (activate)="onActivate($event)"
+        [limit]="5">       
+        <ngx-datatable-column name="Batch" prop="batch" ></ngx-datatable-column>
+        <ngx-datatable-column name="Code" prop="code"></ngx-datatable-column>
+        <ngx-datatable-column name="Date" prop="batchdate">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | date: 'MM/dd/yyyy'}}
+            </ng-template>            
+        </ngx-datatable-column>
+       
+        <ngx-datatable-column name="#Total" prop="totalsamples" ></ngx-datatable-column>
+        <ngx-datatable-column name="#NIR" prop="nirtotal"></ngx-datatable-column>
+        <ngx-datatable-column name="Open" prop="niropen"></ngx-datatable-column>
+        <ngx-datatable-column name="Turnaround" prop="nirturnaround"></ngx-datatable-column>
+        <ngx-datatable-column name="#Total" prop="chemtotal"></ngx-datatable-column>
+        <ngx-datatable-column name="Open" prop="chemopen"></ngx-datatable-column>
+        <ngx-datatable-column name="Turnaround" prop="chemturnaround"></ngx-datatable-column>
+</ngx-datatable>
+<br/>
+<h4>Samples</h4>
+<div>
+  <app-samples [samples] = "samples" [userId]= "this.user.UserID" [batch] = "this.selectedBatch"></app-samples>
+</div>
+
+
+
+</div>
+</div>
+ <div class="col-md-4">
+      <!--<div class='selected-column'>
+        <h4>Selections</h4>
+        <ul>
+          <li *ngFor='let sel of selected'>
+            {{sel.batch}}
+          </li>
+          <li *ngIf="!selected.length">No Selections</li>
+        </ul>
+      </div>-->
+      <div class="pull-right"><a class="pull-right anchor" (click)="LogOff()">Log Off</a></div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="btn-group">
+            <button type="button" (click) ="AddSample()" class="btn btn-default col-xs-3">Add Sample</button>
+            <button type="button" class="btn btn-default col-xs-3">Button 2</button>
+            <button type="button" class="btn btn-default col-xs-3">Button 3</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" btn-group">
+            <button type="button" class="btn btn-default col-xs-3">Button 4</button>
+            <button type="button" class="btn btn-default col-xs-3">Button 5</button>
+            <button type="button" class="btn btn-default col-xs-3">Button 6</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" btn-group">
+            <button type="button" class="btn btn-default col-xs-3">Button 7</button>
+            <button type="button" class="btn btn-default col-xs-3">Button 8</button>
+            <button type="button" class="btn btn-default col-xs-3">Button 9</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+
+</div>
+
+
+

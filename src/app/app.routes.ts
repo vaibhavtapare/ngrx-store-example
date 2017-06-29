@@ -1,3 +1,5 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 import { SubmissionsummaryComponent } from './addsample/submissionsummary/submissionsummary.component';
 import { AnalysisoptionsComponent } from './addsample/analysisoptions/analysisoptions.component';
 import { PackageselectionComponent } from './addsample/packageselection/packageselection.component';
@@ -5,15 +7,15 @@ import { SampledetailsComponent } from './addsample/sampledetails/sampledetails.
 import { BilltoComponent } from './addsample/billto/billto.component';
 import { AddsampleComponent } from './addsample/addsample.component';
 import { UnknownComponent } from './unknown/unknown.component';
-import { SampleComponent } from './batches/sample/sample.component';
-import { SamplesComponent } from './batches/samples/samples.component';
-import { BatchesComponent } from './batches/batches.component';
+
+
 import { Routes } from "@angular/router"
 
 export const routes: Routes = [
-    { path: '', component: BatchesComponent },
-    { path: 'samples/:batch', component: SamplesComponent },
-    { path: 'sample/:batch/:code', component: SampleComponent },
+    { path: '', component: LoginComponent },
+    { path: '\dashboard', component: DashboardComponent},
+    // { path: 'samples/:batch', component: SamplesComponent },
+    // { path: 'sample/:batch/:code', component: SampleComponent },
     {
         path: 'addsample/:labid',
         children: [

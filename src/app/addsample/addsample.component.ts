@@ -20,6 +20,8 @@ export class AddsampleComponent implements OnInit, OnDestroy {
   searching = false;
   billtoList: BillTo[];
   countries: Country[];
+
+  Header: string = 'Add Sample';
   currentSample: Sample = { SampleID: 0, BillTo: [], LabID: 0, Batch: 0, Code: 0 };
 
 

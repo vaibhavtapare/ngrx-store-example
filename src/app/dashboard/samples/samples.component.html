@@ -1,0 +1,29 @@
+<ngx-datatable class="material" [rows]="samples" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+        [selectionType]="'single'" [limit]="5">
+        <ngx-datatable-column name="Status" prop="status" [width]="80">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                        <div *ngIf="value == 0">
+                             <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                        <div *ngIf="value == 1">
+                               <span class="glyphicon glyphicon-ok"></span>
+                        </div>
+                </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Code" prop="code" [width]="80"></ngx-datatable-column>
+        <ngx-datatable-column name="FarmName" prop="farmname" [width]="200"></ngx-datatable-column>
+        <ngx-datatable-column name="SampleDescription" prop="sampledescription" [width]="300"></ngx-datatable-column>
+        <ngx-datatable-column name="Completed" prop="completeddate" [width]="100">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                        {{value | date: 'MM/dd/yyyy'}}
+                </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="View" [width]="100" prop="code">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                        <a href="/dashboard#." value="value" (click)="viewSample(value)"> View</a>
+                </ng-template>
+        </ngx-datatable-column>
+        <!--<ngx-datatable-column name="NIRClassID" visible= "false" prop="nirclassid"></ngx-datatable-column>
+        <ngx-datatable-column name="ChemClassID"  visible= "false" prop="chemclassid"></ngx-datatable-column>        -->
+</ngx-datatable>

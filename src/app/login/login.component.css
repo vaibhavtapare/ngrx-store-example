@@ -1,0 +1,26 @@
+h2 {
+  color: #369;
+  font-family: Georgia, Helvetica, sans-serif;
+  font-size: 250%;
+}
+.ng-valid[required] {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid[required] {
+  border-left: 5px solid #a94442; /* red */
+}
+p {
+  color: #969;
+  font-family: Georgia, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}

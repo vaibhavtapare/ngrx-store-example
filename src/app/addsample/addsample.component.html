@@ -1,14 +1,4 @@
-  <md-toolbar color="primary">
-    <!--<span><md-icon>mood</md-icon></span>-->
-
-    <span>Add Sample</span>
-
-    <!--<button md-icon-button [md-menu-trigger-for]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>-->
-  </md-toolbar>
-
-<md-tab-group [(selectedIndex)]="selectedIndex" #billtotab (selectChange)="tabChanged(billtotab)">
+  <md-tab-group [(selectedIndex)]="selectedIndex" #billtotab (selectChange)="tabChanged(billtotab)">
   <md-tab  label="BillTo/CopyTo">
     <app-billto></app-billto>
   </md-tab>

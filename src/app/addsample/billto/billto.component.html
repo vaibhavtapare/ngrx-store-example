@@ -63,14 +63,14 @@
                         <tr>
                             <td class="twoColumn">
                                 <md-select align="start" formControlName="Country" ng-model-options="{trackBy: 'account.SelectedCountry'}" placeholder="Country"
-                                    [(ngModel)]="currentSelectedCountry" (ngModelChange)="onChangeCountry()" class="example-full-width" >
+                                    [(ngModel)]="currentSelectedCountry" (ngModelChange)="onChangeCountry()" style="width:50%" class="example-full-width" >
                                     <md-option *ngFor="let country of countries" [value]="country.$.name">
                                         {{ country.$.name }}
                                     </md-option>
                                 </md-select>
                             </td>
                             <td class="twoColumn">
-                                <md-select align="start" formControlName="State" placeholder="State" class="example-full-width">
+                                <md-select align="start" formControlName="State"  style="width:50%"  placeholder="State" class="example-full-width">
                                     <md-option *ngFor="let state of arrStates" [value]="state.StateName">
                                         {{ state.StateName }}
                                     </md-option>

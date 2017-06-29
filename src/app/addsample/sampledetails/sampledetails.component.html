@@ -161,9 +161,9 @@
 
       <div class="clear:both"></div>
 
-      <div class="row" >
-        <div class="col-8" >
-          <md-card class="packageSelection">
+      <div class="row">
+        <div class="col-8">
+          <md-card style="float:left;width:60%;margin-left: 10px;">
             <tr>
               <td class="threeColumn">
                 <md-checkbox class="example-margin" formControlName="Processed" [(ngModel)]="isProcessed">Processed</md-checkbox>
@@ -186,10 +186,10 @@
                 <md-checkbox align="start" class="example-margin" formControlName="isEarlyRelease" [(ngModel)]="isEarlyRelease">Early Release</md-checkbox>
               </td>
             </tr>
-         </md-card>
+          </md-card>
         </div>
-        <div class="col-4" >
-           <md-card class="packageSelection">
+        <div class="col-4">
+          <md-card style="float:left;width:36%;margin-left: 10px;text-align: center;">
             <tr class="row">
               <td class="example-full-width">
                 <md-select align="start" [(ngModel)]="currentSelectedNIR" ng-model-options="{trackBy: 'nirPackage.packageName'}" formControlName="NIRClass"
@@ -201,14 +201,13 @@
               </td>
             </tr>
             <tr class="row">
-              <td class="twoColumn">
-                <md-checkbox class="example-margin" formControlName="LNIR" [(ngModel)]="LNIR">Plus</md-checkbox>
-              </td>
-              <td class="twoColumn">
+              <td class="threeColumn">
+                <md-checkbox align="start" class="example-margin" formControlName="LNIR" [(ngModel)]="LNIR">Plus</md-checkbox>
                 <md-checkbox align="start" class="example-margin" formControlName="LCAP" [(ngModel)]="LCAP">CPM</md-checkbox>
               </td>
+
             </tr>
-           </md-card> 
+          </md-card>
         </div>
       </div>
 

@@ -1,3 +1,5 @@
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 import { LoaderService } from './state-management/loader/loader.service';
 import { MainEffects } from './state-management/effects/main-effects';
 import { mainStoreReducer } from './state-management/reducers/main-reducer';
@@ -9,12 +11,12 @@ import { AppComponent } from './app.component';
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 // import { AngularFireModule } from 'angularfire2';
-import { BatchesComponent } from './batches/batches.component';
-import { SamplesComponent } from './batches/samples/samples.component';
+// import { BatchesComponent } from './batches/batches.component';
+// import { SamplesComponent } from './batches/samples/samples.component';
 import { routes } from "app/app.routes";
 import { RouterModule } from "@angular/router";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { SampleComponent } from './batches/sample/sample.component';
+// import { SampleComponent } from './batches/sample/sample.component';
 import { UnknownComponent } from './unknown/unknown.component';
 import { AddsampleComponent } from './addsample/addsample.component';
 import { BilltoComponent } from './addsample/billto/billto.component';
@@ -29,6 +31,9 @@ import { BilltodetailsComponent } from './addsample/billto/billtodetails/billtod
 import { CopytodetailsComponent } from './addsample/billto/copytodetails/copytodetails.component';
 import { TabsModule } from 'ng2-tabs'
 import { MdDataTableModule } from 'ng2-md-datatable';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { SamplesComponent } from "app/dashboard/samples/samples.component";
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBa6CmVnFn3vTdtyTBNj7GORku5nBM2cS8",
@@ -40,10 +45,8 @@ export const firebaseConfig = {
 };
 @NgModule({
   declarations: [
-    AppComponent,
-    BatchesComponent,
-    SamplesComponent,
-    SampleComponent,
+    AppComponent,    
+    SamplesComponent,    
     UnknownComponent,
     AddsampleComponent,
     BilltoComponent,
@@ -53,6 +56,10 @@ export const firebaseConfig = {
     SubmissionsummaryComponent,
     BilltodetailsComponent,
     CopytodetailsComponent,
+    LoginComponent,
+    DashboardComponent,
+    // NgxDatatableModule,
+
 
   ],
   imports: [
@@ -72,6 +79,7 @@ export const firebaseConfig = {
     MdNativeDateModule,
     ReactiveFormsModule,
     MdDataTableModule,
+    NgxDatatableModule,
   ],
   providers: [LoaderService],
   bootstrap: [AppComponent]
