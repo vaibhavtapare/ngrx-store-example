@@ -1,3 +1,281 @@
-<p>
-  analysisoptions works!
-</p>
+<div>
+  <md-card class="tabTop">
+    <!--<form class="example-form" (ngSubmit)="onSubmit()">-->
+    <md-tab-group [selectedIndex]="packageSelectedIndex" (selectChange)="tabChanged(addsampleTab)">
+      <!--NIR Tab-->
+      <md-tab label="Options">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true" class="table table-bordered table-striped table-hover table-condensed table-responsive">
+            <ng2-md-datatable-header fix-head md-head style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let options of optionsList" selectableValue={{options.PackageName}}>
+                <td>{{options.PackageName}}</td>
+                <td class="numeric">${{options.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+
+          <!--<table class="table table-bordered table-striped table-hover table-condensed table-responsive">
+            <thead>
+              <tr>
+                <th>
+                  [HEADER]
+                </th>
+                <th>
+                  [HEADER]
+                </th>
+                <th>
+                  [HEADER]
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  [CONTENT]
+                </td>
+                <td>
+                  [CONTENT]
+                </td>
+                <td>
+                  [CONTENT]
+                </td>
+              </tr>
+            </tbody>
+          </table>-->
+        </md-card>
+      </md-tab>
+
+
+      <md-tab label="Components">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let components of componentsList" selectableValue={{components.PackageName}}>
+                <td>{{components.PackageName}}</td>
+                <td class="numeric">${{components.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+      <md-tab label="Insitu">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let insitu of insituList" selectableValue={{insitu.PackageName}}>
+                <td>{{insitu.PackageName}}</td>
+                <td class="numeric">${{insitu.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+      <md-tab label="Invitro Digestibility">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let invitro of invitroList" selectableValue={{invitro.PackageName}}>
+                <td>{{invitro.PackageName}}</td>
+                <td class="numeric">${{invitro.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+
+      <md-tab label="Starch Digestibility">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let starch of starchList" selectableValue={{starch.PackageName}}>
+                <td>{{starch.PackageName}}</td>
+                <td class="numeric">${{starch.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+
+
+      <md-tab label="Proximate">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let proximate of proximateList" selectableValue={{proximate.PackageName}}>
+                <td>{{proximate.PackageName}}</td>
+                <td class="numeric">${{proximate.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+
+
+      <md-tab label="Amino Acid Analysis">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let aminoAcid of aminoAcidList" selectableValue={{aminoAcid.PackageName}}>
+                <td>{{aminoAcid.PackageName}}</td>
+                <td class="numeric">${{aminoAcid.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+
+      <md-tab label="Mycotoxins Analysis">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let mycotoxins of mycotoxinsList" selectableValue={{mycotoxins.PackageName}}>
+                <td>{{mycotoxins.PackageName}}</td>
+                <td class="numeric">${{mycotoxins.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+
+      <md-tab label="Water Analysis">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let water of waterList" selectableValue={{water.PackageName}}>
+                <td>{{water.PackageName}}</td>
+                <td class="numeric">${{water.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+
+      <md-tab label="Manure Analysis">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let manure of manureList" selectableValue={{manure.PackageName}}>
+                <td>{{manure.PackageName}}</td>
+                <td class="numeric">${{manure.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+      <md-tab label="Plant Tissue Analysis">
+        <md-card>
+          <ng2-md-datatable selectable="true" sortable="true">
+            <ng2-md-datatable-header style="border: solid; font-weight: bold">
+              <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+              <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+            </ng2-md-datatable-header>
+            <tbody class="table-striped">
+              <ng2-md-datatable-row *ngFor="let plantTissue of plantTissueList" selectableValue={{plantTissue.PackageName}}>
+                <td>{{plantTissue.PackageName}}</td>
+                <td class="numeric">${{plantTissue.DomesticPrice}}</td>
+              </ng2-md-datatable-row>
+            </tbody>
+          </ng2-md-datatable>
+        </md-card>
+      </md-tab>
+
+
+    </md-tab-group>
+
+
+
+
+
+    <!--<table class="table">
+        <thead class="thead-default">
+          <tr>
+            <th>Check</th>
+            <th>Package Name</th>
+            <th>Domestic</th>
+            <th>Internactional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>-->
+    <div class="button-row">
+      <button md-raised-button color="primary" (click)="GotoSampleDetails()">Previous</button>
+      <button md-raised-button color="primary" type="submit">Next</button>
+    </div>
+    <!--</form>-->
+  </md-card>
+</div>

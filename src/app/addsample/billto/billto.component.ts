@@ -18,7 +18,7 @@ import { FormGroup, Validators, FormControl, FormBuilder } from "@angular/forms"
 export class BilltoComponent implements OnInit {
   billto: FormGroup;
   billtoList: BillTo[];
-  searching = false;
+  inProcessCount: number = 0;
   showLoading: boolean = false;
   selectedAccountId: number = 0;
   selectedBillTo: BillTo;
@@ -69,40 +69,40 @@ export class BilltoComponent implements OnInit {
 
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        debugger;
+        ////////////////debugger;;
         this.billtoList = data.billto;
-        this.searching = data.loading;
+        this.inProcessCount = data.counter;
         this.countries = data.countries;
         this.currentSample = data.sample;
         this.billtoSelectedIndex = data.selectedTabIndex;
-        //debugger;
+        //////////////////debugger;;
         // if (this.currentSample !== undefined) {
-        //   debugger
+        //   ////debugger;
         //   if (this.isSubmitted === true) {
         //     this.isSubmitted = false;
         //    // this.store.dispatch({ type: "SET_SELECTED_INDEX_OF_TAB", payload: { nextIndex: 1 } })
 
         //   }
         // }
-        if (this.searching === true) {
-          ////////debugger;;
+        if (this.inProcessCount > 0) {
+          debugger;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
-        else {
-          ////////debugger;;
+        else if (this.inProcessCount === 0) {
+          debugger;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
-      })
-    //debugger;
+      });
+    //////////////////debugger;;
 
 
 
   }
 
   ngOnInit() {
-    ////////debugger;;
+    ////////////////////////debugger;;;
 
     this.store.dispatch({ type: "PULL_COUNTRIES" });
     this.store.dispatch({ type: "PULL_BILLTO_ACCOUTS" });
@@ -113,8 +113,8 @@ export class BilltoComponent implements OnInit {
   onSubmit() {
     //console.log(this.billto.status);
     //console.log("model-based form submitted"); 
-    //debugger;;
-    // debugger;
+    //////////////////debugger;;;
+    // ////////////////debugger;;
     // console.log(this.billto);
     // this.isSubmitted = true;
     this.store.dispatch({ type: "SET_ADD_SAMPLE_BILLTO", payload: { Billto: this.billto.value, nextIndex: 1 } });
@@ -126,10 +126,10 @@ export class BilltoComponent implements OnInit {
 
   onChangeAccount(event) {
     //console.log(this.selectedAccountId);
-    debugger;;
+    ////////////////debugger;;;
     if (this.currentSelectedAccountCode > 0) {
       this.selectedBillTo = this.billtoList.find(x => x.AccountID == this.currentSelectedAccountCode);
-      ////debugger;;
+      ////////////////////debugger;;;
       this.currentSelectedAccountCode = this.selectedBillTo.AccountID;
 
       (<FormGroup>this.billto)
@@ -153,15 +153,15 @@ export class BilltoComponent implements OnInit {
 
   onChangeCountry() {
     //console.log(this.currentSelectedCountry);
-    ////debugger;;
+    ////////////////////debugger;;;
     if (this.currentSelectedCountry != "") {
-      ////debugger;;
+      ////////////////////debugger;;;
       if (this.countries != undefined) {
         //this.selectedCountry = this.countries.find(x => x.CountryName == this.currentSelectedCountry);
         this.states = [];
         for (var i = 0; i < this.countries.length; i++) {
           if (this.currentSelectedCountry == this.countries[i]['$'].name) {
-            //debugger;;
+            //////////////////debugger;;;
             this.states = this.countries[i]["state"];
           }
         }

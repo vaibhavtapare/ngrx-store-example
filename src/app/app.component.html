@@ -13,16 +13,18 @@
 </div>
         </span>
   <div>
-   
-      <md-toolbar color="primary" style="text-align: center">
-        <!--<span><md-icon>mood</md-icon></span>-->
-        <span><h1 >Cumberland Valley Analytical Services </h1></span>
 
-        <!--<button md-icon-button [md-menu-trigger-for]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>-->
-      </md-toolbar>
-      <router-outlet></router-outlet>
-  
+    <md-toolbar color="primary">
+
+      <div class="col-md-8">
+        <h1>Cumberland Valley Analytical Services </h1>
+      </div>
+      <div class="col-md-4">
+        <a class="pull-right" (click)="LogOff()">Log Off</a>
+      </div>
+
+    </md-toolbar>
+    <router-outlet></router-outlet>
+
   </div>
 </div>

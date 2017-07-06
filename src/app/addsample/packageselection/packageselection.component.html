@@ -1,74 +1,109 @@
 <div>
   <md-card class="tabTop">
-    <form class="example-form"  (ngSubmit)="onSubmit()">
-      <md-tab-group [selectedIndex]="packageSelectedIndex"  (selectChange)="tabChanged(addsampleTab)">
-        <md-tab label="NIR">
-          <ng2-md-datatable selectable="true">
-        <ng2-md-datatable-header>
-          <ng2-md-datatable-column sortableValue="article">Package</ng2-md-datatable-column>
-          <ng2-md-datatable-column sortableValue="product">Domestic</ng2-md-datatable-column>
-        </ng2-md-datatable-header>
-        <tbody>
-          <ng2-md-datatable-row selectableValue="NIR 1">
-            <td>NIR 1</td>
+    <!--<form class="example-form" (ngSubmit)="onSubmit()">-->
+    <md-tab-group [selectedIndex]="packageSelectedIndex" (selectChange)="tabChanged(addsampleTab)">
+      <md-tab label="NIR">
 
-            <td class="numeric">$23.2</td>
-          </ng2-md-datatable-row>
-          <ng2-md-datatable-row selectableValue="NIR 2">
-            <td>NIR 2</td>
+        <!--<ng2-md-datatable selectable="true" sortable="true">
+              <ng2-md-datatable-header style="border: solid; font-weight: bold">
+                <ng2-md-datatable-column sortableValue="PackageName">Package</ng2-md-datatable-column>
+                <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+              </ng2-md-datatable-header>
+              <tbody class="table-striped">
+                  
+                <ng2-md-datatable-row *ngFor="let nirPackage of nirPackageList" selectableValue={{nirPackage.PackageName}}>
+                  <td>{{nirPackage.PackageName}}</td>
+                  <td class="numeric">${{nirPackage.DomesticPrice}}</td>
+                </ng2-md-datatable-row>
 
-            <td class="numeric">$12.4</td>
-          </ng2-md-datatable-row>
-          <ng2-md-datatable-row selectableValue="NIR 3">
-            <td>NIR 3</td>
+              </tbody>
+            </ng2-md-datatable>-->
+        <md-card>
+          <div id="scrollable-content">
+            <ng2-md-datatable sortable="true" style="font-size: 10pt;font-weight: bold; overflow: hidden;">
+              <ng2-md-datatable-header style="font-size: 10pt;font-weight: bold; overflow: hidden;">
+                <ng2-md-datatable-column column-sort="true" sortableValue="PackageName">Package Name</ng2-md-datatable-column>
+                <ng2-md-datatable-column column-sort="true" sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+              </ng2-md-datatable-header>
+              <tbody class="table-striped">
+                <ng2-md-datatable-row *ngFor="let nirPackage of nirPackageList" selectableValue={{nirPackage.PackageName}}>
+                  <td class="table-striped">
+                    <md-radio-group class="example-radio-group" [(ngModel)]="selectedNIRPackage" [ngModelOptions]="{standalone: true}">
+                      <md-radio-button flex ng-value="nirPackage.PackageName" [value]="nirPackage.PackageName">
+                        <span >{{nirPackage.PackageName}}</span>
+                      </md-radio-button>
+                    </md-radio-group>
+                  </td>
+                  <td class="numeric">${{nirPackage.DomesticPrice}}</td>
+                </ng2-md-datatable-row>
+              </tbody>
+            </ng2-md-datatable>
+          </div>
+          Selected Package : {{selectedNIRPackage}}
+        </md-card>
+        <!--<table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Select</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>-->
+      </md-tab>
+      <md-tab label="Chemistry">
+        <md-card>
+          <div id="scrollable-content">
+            <ng2-md-datatable sortable="true">
+              <ng2-md-datatable-header style="font-size: 10pt;font-weight: bold;">
+                <ng2-md-datatable-column sortableValue="PackageName">Package Name</ng2-md-datatable-column>
+                <ng2-md-datatable-column sortableValue="DomesticPrice">Domestic</ng2-md-datatable-column>
+              </ng2-md-datatable-header>
+              <tbody class="table-striped">
+                <ng2-md-datatable-row *ngFor="let chemPackage of chemPackageList" selectableValue={{chemPackage.PackageName}}>
+                  <td style="font-weight: 100">
+                    <md-radio-group class="example-radio-group" [(ngModel)]="selectedCHEMPackage" [ngModelOptions]="{standalone: true}">
+                      <md-radio-button flex ng-value="chemPackage.PackageName" [value]="chemPackage.PackageName">
+                        <label style="font-weight: 100">{{chemPackage.PackageName}}</label>
+                      </md-radio-button>
+                    </md-radio-group>
+                  </td>
+                  <td class="numeric">${{chemPackage.DomesticPrice}}</td>
+                </ng2-md-datatable-row>
+              </tbody>
+            </ng2-md-datatable>
+          </div>
+          Selected Package : {{selectedCHEMPackage}}
+        </md-card>
+      </md-tab>
+    </md-tab-group>
 
-            <td class="numeric">$46.4</td>
-          </ng2-md-datatable-row>
-          <ng2-md-datatable-row selectableValue="NIR 4">
-            <td>NIR 4</td>
-
-            <td class="numeric">$24.3</td>
-          </ng2-md-datatable-row>
-        </tbody>
-      </ng2-md-datatable>
-        </md-tab>
-        <md-tab label="Chemistry">
-        <ng2-md-datatable selectable="true">
-        <ng2-md-datatable-header>
-          <ng2-md-datatable-column sortableValue="article">Package</ng2-md-datatable-column>
-          <ng2-md-datatable-column sortableValue="product">Domestic</ng2-md-datatable-column>
-        </ng2-md-datatable-header>
-        <tbody>
-          <ng2-md-datatable-row selectableValue="NIR 1">
-            <td>NIR 1</td>
-
-            <td class="numeric">$23.2</td>
-          </ng2-md-datatable-row>
-          <ng2-md-datatable-row selectableValue="NIR 2">
-            <td>NIR 2</td>
-
-            <td class="numeric">$12.4</td>
-          </ng2-md-datatable-row>
-          <ng2-md-datatable-row selectableValue="NIR 3">
-            <td>NIR 3</td>
-
-            <td class="numeric">$46.4</td>
-          </ng2-md-datatable-row>
-          <ng2-md-datatable-row selectableValue="NIR 4">
-            <td>NIR 4</td>
-
-            <td class="numeric">$24.3</td>
-          </ng2-md-datatable-row>
-        </tbody>
-      </ng2-md-datatable>
-        </md-tab>
-      </md-tab-group>
 
 
 
-      
 
-      <!--<table class="table">
+    <!--<table class="table">
         <thead class="thead-default">
           <tr>
             <th>Check</th>
@@ -98,12 +133,10 @@
           </tr>
         </tbody>
       </table>-->
-       <div class="button-row">
-        <button md-raised-button color="primary" (click)="GotoSampleDetails()">Previous</button>
-        <button md-raised-button color="primary" type="submit">Next</button>
-      </div>
-    </form>
-    
-
+    <div class="button-row">
+      <button md-raised-button color="primary" (click)="GotoSampleDetails()">Previous</button>
+      <button md-raised-button color="primary" type="submit">Next</button>
+    </div>
+    <!--</form>-->
   </md-card>
 </div>

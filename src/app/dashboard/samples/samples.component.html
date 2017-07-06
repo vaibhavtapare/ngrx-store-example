@@ -1,5 +1,5 @@
 <ngx-datatable class="material" [rows]="samples" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
-        [selectionType]="'single'" [limit]="5">
+        [selectionType]="'single'" [limit]="7">
         <ngx-datatable-column name="Status" prop="status" [width]="80">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                         <div *ngIf="value == 0">

@@ -1,3 +1,5 @@
+
+import { NgPipesModule } from 'ngx-pipes';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { LoaderService } from './state-management/loader/loader.service';
@@ -5,7 +7,7 @@ import { MainEffects } from './state-management/effects/main-effects';
 import { mainStoreReducer } from './state-management/reducers/main-reducer';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { StoreModule } from "@ngrx/store";
@@ -45,8 +47,8 @@ export const firebaseConfig = {
 };
 @NgModule({
   declarations: [
-    AppComponent,    
-    SamplesComponent,    
+    AppComponent,
+    SamplesComponent,
     UnknownComponent,
     AddsampleComponent,
     BilltoComponent,
@@ -57,7 +59,7 @@ export const firebaseConfig = {
     BilltodetailsComponent,
     CopytodetailsComponent,
     LoginComponent,
-    DashboardComponent,
+    DashboardComponent, 
     // NgxDatatableModule,
 
 
@@ -70,16 +72,18 @@ export const firebaseConfig = {
     EffectsModule.run(MainEffects),
     //AngularFireModule.initializeApp(firebaseConfig), 
     RouterModule.forRoot(routes),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    // StoreDevtoolsModule.instrumentOnlyWithExtension(),
     BrowserAnimationsModule,
     MaterialModule,
     MdButtonModule,
     MdCheckboxModule,
-    TabsModule, 
+    TabsModule,
     MdNativeDateModule,
     ReactiveFormsModule,
     MdDataTableModule,
     NgxDatatableModule,
+    NgPipesModule,   
+
   ],
   providers: [LoaderService],
   bootstrap: [AppComponent]

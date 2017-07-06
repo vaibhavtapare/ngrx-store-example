@@ -22,11 +22,21 @@ a {
     float: right;
 }
 
+md-grid-list {
+height: 100%;
+}
+
 
 md-checkbox.dynamic-color-checkbox {
     width: 30px;
     height: 30px;
 }
+
+mat-input-placeholder
+{
+   font-weight: normal !important; 
+}
+
 
  md-card-spinner {
       padding-left: 60px; 
@@ -135,5 +145,19 @@ md-card{
   float: left; 
 
 }
+
+.label{
+
+  font-weight: normal !important; 
+}
+
+
+#scrollable-content {
+  height: 280px;
+  overflow: auto;  
+}
+
+
+
 
 

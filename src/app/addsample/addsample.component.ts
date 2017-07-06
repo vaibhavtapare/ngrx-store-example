@@ -30,31 +30,31 @@ export class AddsampleComponent implements OnInit, OnDestroy {
 
     store.select('mainStoreReducer')
       .subscribe((data: State) => {
-        debugger;
+        ////////////////debugger;;
         this.billtoList = data.billto;
         this.searching = data.loading;
         this.countries = data.countries;
         this.selectedIndex = data.selectedTabIndex;
 
         if (this.searching === true) {
-          //////debugger;
+          //////////////////////debugger;;
           //this.showLoading = true;
           this.loaderService.display(true);
         }
         else {
-          //////debugger;
+          //////////////////////debugger;;
           //this.showLoading = false;
           this.loaderService.display(false);
         }
       })
 
     //   if (this.currentSample.BillTo !== undefined) {
-    //     //////debugger;
+    //     //////////////////////debugger;;
     //     //this.showLoading = true;
     //     this.loaderService.display(true);
     //   }
     //   else {
-    //     //////debugger;
+    //     //////////////////////debugger;;
     //     //this.showLoading = false;
     //     this.loaderService.display(false);
     //   }
@@ -65,7 +65,7 @@ export class AddsampleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    //debugger;
+    //////////////////debugger;;
     this.sub = this.route.params.subscribe(params => {
       this.labid = +params['labid']; // (+) converts string 'id' to a number
     });
@@ -79,7 +79,7 @@ export class AddsampleComponent implements OnInit, OnDestroy {
 
 
   tabChanged(tab) {
-    debugger;
+    ////////////////debugger;;
 
     this.selectedIndex = tab._selectedIndex;
     console.log('Tab Changed: ', this.selectedIndex);

@@ -5,20 +5,32 @@
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td class="twoColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedFarm" ng-model-options="{trackBy: 'farm.SourceGroup'}" formControlName="FarmName"
+            <!--<md-select align="start" [(ngModel)]="currentSelectedFarm" 
+            ng-model-options="{trackBy: 'farm.SourceGroup'}" formControlName="FarmName"
               placeholder="Select Farm" class="example-full-width">
               <md-option *ngFor="let farm of farmList" [value]="farm.SourceGroup">
                 {{ farm.SourceGroup }}
               </md-option>
-            </md-select>
+            </md-select>-->
+
+             <md-input-container class="example-full-width">
+              <input formControlName="FarmName" mdInput placeholder="Enter Farm">
+            </md-input-container>
+
+
           </td>
           <td class="twoColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedSourcegroup" ng-model-options="{trackBy: 'sourceGroupOption.SourceGroupOption'}"
+            <!--<md-select align="start" [(ngModel)]="currentSelectedSourcegroup" 
+            ng-model-options="{trackBy: 'sourceGroupOption.SourceGroupOption'}"
               formControlName="SourceGroupOption" placeholder="Select Option" class="example-full-width">
               <md-option *ngFor="let sourceGroupOption of sourceGroupOptionList" [value]="sourceGroupOption.SourceGroupOption">
-                {{ sourceGroupOption.SourceGroupOption }}
+                {{ sourceGroupOption.SourceGroupOption }} 
               </md-option>
-            </md-select>
+            </md-select>-->
+
+             <md-input-container class="example-full-width">
+              <input formControlName="SourceGroupOption" mdInput placeholder="Enter Option">
+            </md-input-container>
           </td>
         </tr>
 
@@ -29,26 +41,29 @@
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td class="threeColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedFeedCode" ng-model-options="{trackBy: 'feedCode.FeedCodeID'}" formControlName="FeedClass"
+            <md-select align="start" [(ngModel)]="currentSelectedFeedCode" 
+            ng-model-options="{trackBy: 'feedCode.FeedCodeID'}" (change)="onChangeQuickFeed()" formControlName="FeedClass"
               placeholder="Quick Feed" class="example-full-width">
-              <md-option *ngFor="let feedCode of feedCodeList" [value]="feedCode.FeedCodeID">
-                {{ feedCode.FeedCode }}
+              <md-option *ngFor="let feedCode of quickFeedCodeList" [value]="feedCode.FeedCodeID">
+                {{ feedCode.FeedType }} [{{feedCode.Designator}}]
               </md-option>
             </md-select>
           </td>
           <td class="threeColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedGeneralClass" ng-model-options="{trackBy: 'generalClass.generalClass'}"
-              formControlName="FeedClass" placeholder="General Class" class="example-full-width">
-              <md-option *ngFor="let generalClass of generalClassList" [value]="generalClass.FeedCodeID">
-                {{ generalClass.generalClass }}
+            <md-select align="start" [(ngModel)]="currentSelectedGeneralClass" 
+            ng-model-options="{trackBy: 'generalClass.GeneralClass'}" (change)="onChangeGeneralClass()"
+              formControlName="FeedGeneralClass" placeholder="General Class" class="example-full-width">
+              <md-option *ngFor="let generalClass of generalClassList" [value]="generalClass.GeneralClass">
+                {{ generalClass.GeneralClass }}
               </md-option>
             </md-select>
           </td>
           <td class="threeColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedFeedType" ng-model-options="{trackBy: 'feedType.FeedType'}" formControlName="FeedClass"
+            <md-select align="start" [(ngModel)]="currentSelectedFeedTypeId" 
+            ng-model-options="{trackBy: 'feedType.FeedType'}" formControlName="FeedType"
               placeholder="Feed Type" class="example-full-width">
               <md-option *ngFor="let feedType of feedTypeList" [value]="feedType.FeedCodeID">
-                {{ feedType.FeedType }}
+                {{ feedType.FeedType }} [{{feedType.Designator}}]
               </md-option>
             </md-select>
           </td>
@@ -59,7 +74,7 @@
         <tr>
           <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput [mdDatepicker]="pickerSampledDate" formControlName="CollectedDate" placeholder="Sampled Date">
+              <input mdInput   [(ngModel)]="CollectedDateValue" [mdDatepicker]="pickerSampledDate" formControlName="CollectedDate" placeholder="Sampled Date">
               <button mdSuffix [mdDatepickerToggle]="pickerSampledDate"></button>
             </md-input-container>
             <md-datepicker #pickerSampledDate></md-datepicker>
@@ -67,7 +82,7 @@
           </td>
           <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput [mdDatepicker]="pickerHarvestDate" formControlName="SampledDate" placeholder="Harvest Date">
+              <input mdInput [(ngModel)]="SampledDateValue" [mdDatepicker]="pickerHarvestDate" formControlName="SampledDate" placeholder="Harvest Date">
               <button mdSuffix [mdDatepickerToggle]="pickerHarvestDate"></button>
             </md-input-container>
             <md-datepicker #pickerHarvestDate></md-datepicker>
@@ -75,7 +90,7 @@
           </td>
           <td class="threeColumn">
             <md-input-container class="example-full-width">
-              <input mdInput [mdDatepicker]="pickerShippedDate" formControlName="ShippedDate" placeholder="Shipped Date">
+              <input mdInput [(ngModel)]="ShippedDateValue" [mdDatepicker]="pickerShippedDate" formControlName="ShippedDate" placeholder="Shipped Date">
               <button mdSuffix [mdDatepickerToggle]="pickerShippedDate"></button>
             </md-input-container>
             <md-datepicker #pickerShippedDate></md-datepicker>
@@ -107,26 +122,26 @@
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td class="threeColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedSampleVolume" ng-model-options="{trackBy: 'sampleVolume.sampleVolumeName'}"
+            <md-select align="start" [(ngModel)]="currentSelectedSampleVolume" ng-model-options="{trackBy: 'sampleVolume'}"
               formControlName="SampleVolume" placeholder="Sample Volume" class="example-full-width">
-              <md-option *ngFor="let sampleVolume of sampleVolumeList" [value]="sampleVolume.sampleVolumeName">
-                {{ sampleVolume.sampleVolumeName }}
+              <md-option *ngFor="let sampleVolume of sampleVolumeList" [value]="sampleVolume">
+                {{ sampleVolume }}
               </md-option>
             </md-select>
           </td>
           <td class="threeColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedReceivingConditions" ng-model-options="{trackBy: 'cutting.cuttingName'}"
+            <md-select align="start" [(ngModel)]="currentSelectedReceivingConditions" ng-model-options="{trackBy: 'receivingCondition'}"
               formControlName="Cutting" placeholder="Receiving  Condition" class="example-full-width">
-              <md-option *ngFor="let receivingCondition of receivingConditionsList" [value]="receivingCondition.receivingConditionName">
-                {{ receivingCondition.receivingConditionName }}
+              <md-option *ngFor="let receivingCondition of receivingConditionsList" [value]="receivingCondition">
+                {{ receivingCondition }}
               </md-option>
             </md-select>
           </td>
           <td class="threeColumn">
-            <md-select align="start" [(ngModel)]="currentSelectedCutting" ng-model-options="{trackBy: 'cutting.cuttingName'}" formControlName="Cutting"
-              placeholder="Cutting      " class="example-full-width">
-              <md-option *ngFor="let cutting of cuttingList" [value]="cutting.cuttingName">
-                {{ cutting.cuttingName }}
+            <md-select align="start" [(ngModel)]="currentSelectedCutting" ng-model-options="{trackBy: 'cutting'}" formControlName="Cutting"
+              placeholder="Cutting" class="example-full-width">
+              <md-option *ngFor="let cutting of cuttingList" [value]="cutting">
+                {{ cutting }}
               </md-option>
             </md-select>
 
@@ -145,7 +160,7 @@
           <td class="threeColumn">
             <md-select align="start" [(ngModel)]="currentSelectedYear" [style.padding-bottom]="'18px'" ng-model-options="{trackBy: 'year'}"
               formControlName="Year" placeholder="Year" class="example-full-width">
-              <md-option *ngFor="let year of yearList" [value]="year">
+              <md-option *ngFor="let year of YearList" [value]="year">
                 {{ year }}
               </md-option>
             </md-select>
@@ -192,10 +207,10 @@
           <md-card style="float:left;width:36%;margin-left: 10px;text-align: center;">
             <tr class="row">
               <td class="example-full-width">
-                <md-select align="start" [(ngModel)]="currentSelectedNIR" ng-model-options="{trackBy: 'nirPackage.packageName'}" formControlName="NIRClass"
+                <md-select align="start" [(ngModel)]="currentSelectedNIR" ng-model-options="{trackBy: 'nirPackage.PackageName'}" formControlName="NIRClass"
                   placeholder="NIR Package">
-                  <md-option *ngFor="let nirPackage of nirPackageList" [value]="nirPackage.packageName">
-                    {{ nirPackage.packageName }}
+                  <md-option *ngFor="let nirPackage of nirPackageList" [value]="nirPackage.PackageName">
+                    {{ nirPackage.PackageName }}
                   </md-option>
                 </md-select>
               </td>

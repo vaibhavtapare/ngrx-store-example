@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LoaderService } from './state-management/loader/loader.service';
 import { Batches } from './state-management/model/workingbatches';
 import { Cheese } from './.cheese';
@@ -18,12 +19,17 @@ export class AppComponent implements OnInit{
   showLoader: boolean; 
 
   constructor(
-        private loaderService: LoaderService) {
+        private loaderService: LoaderService,private router: Router) {
     }
   
   ngOnInit() {
         this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
         });
+    }
+
+    LogOff(){
+        localStorage.removeItem("user"); 
+        this.router.navigate(['']);
     }
 }
